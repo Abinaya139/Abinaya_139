@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #taskInput {
+            width: calc(100% - 120px);
+            padding: 10px;
+            font-size: 16px;
+        }
+        #addButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #taskList {
+            list-style: none;
+            padding: 0;
+        }
+        #taskList li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        #taskList span {
+            flex: 1;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+        .removeButton {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .completeButton {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <input type="text" id="taskInput" placeholder="Enter a new task">
+    <button id="addButton">Add Task</button>
+    <ul id="taskList"></ul>
+
+    <script>
+        document.getElementById('addButton').addEventListener('click', function() {
+            const taskInput = document.getElementById('taskInput');
+            const taskText = taskInput.value.trim();
+            
+            if (taskText === '') {
+                alert('Please enter a task.');
+                return;
+            }
+
+            const taskList = document.getElementById('taskList');
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span>${taskText}</span>
+                <button class="completeButton" onclick="toggleCompletion(this)">Complete</button>
+                <button class="removeButton" onclick="removeTask(this)">Remove</button>
+            `;
+            taskList.appendChild(li);
+
+            taskInput.value = '';
+        });
+
+        function toggleCompletion(button) {
+            const span = button.previousElementSibling;
+            span.classList.toggle('completed');
+        }
+
+        function removeTask(button) {
+            const taskList = document.getElementById('taskList');
+            taskList.removeChild(button.parentElement);
+        }
+    </script>
+</body>
+</html>
