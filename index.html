@@ -3,12 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello, World!</title>
+    <title>Full Stack Laboratory</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa; /* Light gray background for overall layout */
+            color: #202124; /* Dark text for contrast */
+        }
+        header {
+            background: linear-gradient(to right, #a1c4fd, #c2e9fb); /* Light blue gradient */
+            color: #202124; /* Dark text for contrast */
+            padding: 15px 20px;
+            text-align: center;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            font-weight: 700;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #c2e9fb; /* Matching light blue background */
+        }
+        nav ul li {
+            margin: 0 10px;
+        }
+        nav ul li a {
+            color: #202124; /* Dark text for contrast */
+            text-decoration: none;
+            padding: 12px 20px;
+            display: block;
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 5px;
+        }
+        nav ul li a:hover {
+            background-color: #a1c4fd; /* Light blue hover */
+            color: #ffffff; /* White text on hover */
+        }
+        main {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+        section {
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        #home {
+            background: linear-gradient(to right, #f9f9f9, #e3fdfd); /* Very light blue-green gradient */
+            color: #202124; /* Dark text for readability */
+        }
+        #home h2 {
+            color: #333; /* Darker gray for headings */
+        }
+        #home p a {
+            color: #0072ff; /* Light blue for links */
+            font-weight: bold;
+        }
+        #portfolio {
+            background: linear-gradient(to right, #f8efba, #f6d365); /* Soft yellow-orange gradient */
+            color: #202124;
+        }
+        #portfolio h2 {
+            color: #333; /* Darker gray for headings */
+        }
+        #portfolio p a {
+            color: #ff8c42; /* Orange for links */
+            font-weight: bold;
+        }
+        #todo {
+            background: linear-gradient(to right, #d4fc79, #96e6a1); /* Soft green gradient */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            color: #202124; /* Dark text for readability */
+        }
+        #todo h2 {
+            color: #388e3c; /* Darker green for emphasis */
+        }
+        #todo p {
+            color: #202124; /* Dark text for readability */
+            margin-bottom: 15px;
+        }
+        .todo-container {
+            background-color: #ffffff; /* White background for to-do items */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.05); /* Soft shadow */
+            transition: transform 0.3s, box-shadow 0.3s; /* Transition effect for hover */
+        }
+        .todo-container:hover {
+            transform: translateY(-10px); /* Slight lift effect */
+            box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+        }
+        .todo-container h3 {
+            color: #388e3c; /* Green color for to-do container headings */
+            margin-top: 0;
+        }
+        .todo-container p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .todo-container a {
+            color: #388e3c; /* Green links */
+            text-decoration: none;
+            font-weight: bold;
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+        .todo-container a:hover {
+            color: #5c6bc0; /* Lighter blue on hover */
+            border-bottom-color: #5c6bc0;
+        }
+        footer {
+            text-align: center;
+            padding: 15px; /* Increased padding */
+            background: linear-gradient(to right, #a8edea, #fed6e3); /* Pastel pink and teal gradient */
+            color: #202124; /* Dark text */
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            font-size: 0.9em; /* Slightly larger font size */
+            box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, World!</h1>
-    <p>This is a simple HTML page.</p>
-    <a href="https://abinaya139.github.io/Abinaya_139/port/portfolio.html" alt="portfolio">PORTFOLIO</a>
-    <a href="https://abinaya139.github.io/Abinaya_139/todo/signup.html" alt="todolist">TODOLIST</a>
+    <header>
+        <h1>Full Stack Laboratory</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="https://kavya383.github.io/Ex-1/portfolio/port.html">Portfolio</a></li>
+                <li><a href="https://kavya383.github.io/todo-app/login.html">To-Do List</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home">
+            <h2>Home</h2>
+            <p>Welcome to the Full Stack Laboratory. Explore various projects and exercises showcasing my work in web development.</p>
+            <p>Check out the <a href="https://kavya383.github.io/Ex-1/portfolio/port.html">Portfolio</a> for more details.</p>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio">
+            <h2>My Portfolio</h2>
+            <p>Explore my <a href="https://kavya383.github.io/Ex-1/portfolio/port.html">portfolio</a> to see a collection of projects, detailing the technologies used and challenges overcome.</p>
+        </section>
+
+        <!-- To-Do List Section -->
+        <section id="todo">
+            <h2>To-Do List Application</h2>
+            <p>This is a simple web-based to-do list application that allows users to add, view, and manage their tasks. The to-do list is a part of my Full Stack Web Development exercises and demonstrates basic CRUD operations using HTML, CSS, and JavaScript.</p>
+            
+            <!-- To-Do List Container -->
+            <div class="todo-container">
+                <h3>Manage Your Tasks</h3>
+                <p>Click the link below to explore the To-Do List application:</p>
+                <p><a href="https://kavya383.github.io/todo-app/login.html">Open To-Do List Application</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Full Stack Laboratory. All rights reserved.</p>
+    </footer>
 </body>
 </html>
