@@ -1,168 +1,133 @@
 let currentUser = null;
+const users = [];
+const posts = [];
+const followersMap = {};
 
-// Register a new user
-async function registerUser() {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+function registerUser() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-  if (!username || !password) {
-    alert("Please fill in both fields!");
-    return;
-  }
+    if (username && password) {
+        users.push({ username, password });
+        currentUser = username;
+        followersMap[username] = []; // Initialize followers for the new user
+        alert('Registration successful!');
 
-  try {
-    const response = await fetch("/api/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      alert("Failed to register: " + errorData.message);
-      return;
+        document.getElementById('registration').style.display = 'none';
+        document.getElementById('feed').style.display = 'block';
+        displayFollowers();
+    } else {
+        alert('Please enter a username and password.');
     }
-
-    const data = await response.json();
-    currentUser = data;
-    document.getElementById("registration").style.display = "none";
-    document.getElementById("feed").style.display = "block";
-    loadFeed();
-  } catch (error) {
-    alert("Error connecting to server. Please try again.");
-  }
 }
 
-// Create a new post
-async function createPost() {
-  const content = document.getElementById("postContent").value;
-  const postImage = document.getElementById("postImage").files[0];
-  let imageUrl = '';
+function createPost() {
+    const content = document.getElementById('postContent').value;
+    const imageFile = document.getElementById('postImage').files[0];
 
-  if (postImage) {
-    imageUrl = URL.createObjectURL(postImage); // Just simulate image upload
-  }
-
-  if (!content) {
-    alert("Please enter content!");
-    return;
-  }
-
-  try {
-    const response = await fetch("/api/posts/create", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ content, authorUsername: currentUser.username, imageUrl }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      alert("Failed to create post: " + errorData.message);
-      return;
+    if (content) {
+        const post = {
+            content,
+            image: imageFile ? URL.createObjectURL(imageFile) : null,
+            author: currentUser,
+            likes: 0,
+            likedBy: [] // Track users who liked the post
+        };
+        posts.push(post);
+        displayPosts();
+        document.getElementById('postContent').value = '';
+        document.getElementById('postImage').value = '';
+    } else {
+        alert('Please enter some content for your post.');
     }
-
-    document.getElementById("postContent").value = "";
-    document.getElementById("postImage").value = "";
-    loadFeed();
-  } catch (error) {
-    alert("Error connecting to server. Please try again.");
-  }
 }
 
-// Load the user's feed
-async function loadFeed() {
-  try {
-    const response = await fetch(/api/posts/feed/${currentUser.username});
-    if (!response.ok) {
-      const errorData = await response.json();
-      alert("Failed to load feed: " + errorData.message);
-      return;
-    }
+function displayPosts() {
+    const postsContainer = document.getElementById('posts');
+    postsContainer.innerHTML = '';
 
-    const posts = await response.json();
-    const postsContainer = document.getElementById("posts");
-    postsContainer.innerHTML = "";
+    posts.forEach((post, index) => {
+        const postDiv = document.createElement('div');
+        postDiv.classList.add('post');
 
-    posts.forEach(post => {
-      const postDiv = document.createElement("div");
-      postDiv.className = "post";
-      postDiv.innerHTML = `<strong>${post.authorUsername}:</strong> ${post.content}
-        ${post.imageUrl ? <img src="${post.imageUrl}" alt="Post Image"> : ''}
-        <div class="likes">Likes: ${post.likes} <button onclick="likePost('${post.id}')">Like</button></div>`;
-      postsContainer.appendChild(postDiv);
+        const content = document.createElement('p');
+        content.textContent = post.content;
+
+        if (post.image) {
+            const img = document.createElement('img');
+            img.src = post.image;
+            img.style.maxWidth = '200px';
+            postDiv.appendChild(img);
+        }
+
+        const author = document.createElement('small');
+        author.textContent = `Posted by: ${post.author}`;
+        postDiv.appendChild(author);
+
+        const likeButton = document.createElement('button');
+        likeButton.textContent = `Like (${post.likes})`;
+        likeButton.onclick = () => likePost(index);
+        postDiv.appendChild(likeButton);
+
+        postsContainer.appendChild(postDiv);
     });
-  } catch (error) {
-    alert("Error loading feed. Please try again.");
-  }
 }
 
-// Like a post
-async function likePost(postId) {
-  try {
-    await fetch("/api/posts/like", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ postId }),
-    });
+function likePost(postIndex) {
+    const post = posts[postIndex];
 
-    loadFeed();
-  } catch (error) {
-    alert("Error liking post. Please try again.");
-  }
+    if (!post.likedBy.includes(currentUser)) {
+        post.likes++;
+        post.likedBy.push(currentUser);
+    } else {
+        post.likes--;
+        post.likedBy = post.likedBy.filter(user => user !== currentUser);
+    }
+    
+    displayPosts();
 }
 
-// Follow a user by username
-async function followUser() {
-  const followUsername = document.getElementById("followUsername").value;
+function followUser() {
+    const usernameToFollow = document.getElementById('followUsername').value;
 
-  if (!followUsername) {
-    alert("Please enter a username to follow!");
-    return;
-  }
-
-  try {
-    const response = await fetch("/api/follow", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ followerUsername: currentUser.username, followeeUsername: followUsername }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      alert("Failed to follow: " + errorData.message);
-      return;
+    if (users.some(user => user.username === usernameToFollow) && usernameToFollow !== currentUser) {
+        if (!followersMap[usernameToFollow].includes(currentUser)) {
+            followersMap[usernameToFollow].push(currentUser);
+            alert(`Followed ${usernameToFollow}`);
+        } else {
+            alert(`You are already following ${usernameToFollow}`);
+        }
+    } else {
+        alert('User not found or you cannot follow yourself.');
     }
 
-    loadFeed();
-  } catch (error) {
-    alert("Error following user. Please try again.");
-  }
+    displayFollowers();
 }
 
-// Unfollow a user by username
-async function unfollowUser() {
-  const followUsername = document.getElementById("followUsername").value;
+function unfollowUser() {
+    const usernameToUnfollow = document.getElementById('followUsername').value;
 
-  if (!followUsername) {
-    alert("Please enter a username to unfollow!");
-    return;
-  }
-
-  try {
-    const response = await fetch("/api/unfollow", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ followerUsername: currentUser.username, followeeUsername: followUsername }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      alert("Failed to unfollow: " + errorData.message);
-      return;
+    if (followersMap[usernameToUnfollow]) {
+        followersMap[usernameToUnfollow] = followersMap[usernameToUnfollow].filter(user => user !== currentUser);
+        alert(`Unfollowed ${usernameToUnfollow}`);
     }
 
-    loadFeed();
-  } catch (error) {
-    alert("Error unfollowing user. Please try again.");
-  }
+    displayFollowers();
+}
+
+function displayFollowers() {
+    const followersContainer = document.getElementById('followers');
+    followersContainer.innerHTML = '';
+
+    const currentFollowers = Object.keys(followersMap).filter(user => followersMap[user].includes(currentUser));
+    
+    if (currentFollowers.length === 0) {
+        followersContainer.textContent = 'You have no followers.';
+    } else {
+        currentFollowers.forEach(follower => {
+            const followerDiv = document.createElement('div');
+            followerDiv.textContent = follower;
+            followersContainer.appendChild(followerDiv);
+        });
+    }
 }
