@@ -23,22 +23,22 @@ function createPost() {
   let likes = 0;
   let dislikes = 0;
 
-  // Like button
+  // Like button with small icon
   const likeButton = document.createElement('button');
   likeButton.classList.add('small-button');
-  likeButton.innerHTML = `👍 ${likes}`;
+  likeButton.innerHTML = `<img src="like-icon.png" alt="Like" class="icon"> ${likes}`;
   likeButton.onclick = function() {
     likes++;
-    likeButton.innerHTML = `👍 ${likes}`;
+    likeButton.innerHTML = `<img src="like-icon.png" alt="Like" class="icon"> ${likes}`;
   };
 
-  // Dislike button
+  // Dislike button with small icon
   const dislikeButton = document.createElement('button');
   dislikeButton.classList.add('small-button');
-  dislikeButton.innerHTML = `👎 ${dislikes}`;
+  dislikeButton.innerHTML = `<img src="dislike-icon.png" alt="Dislike" class="icon"> ${dislikes}`;
   dislikeButton.onclick = function() {
     dislikes++;
-    dislikeButton.innerHTML = `👎 ${dislikes}`;
+    dislikeButton.innerHTML = `<img src="dislike-icon.png" alt="Dislike" class="icon"> ${dislikes}`;
   };
 
   // Comment input and button
