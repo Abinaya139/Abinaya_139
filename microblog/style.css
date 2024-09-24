@@ -27,7 +27,6 @@ input[type="text"], textarea {
 }
 
 button {
-    width: 100%;
     padding: 10px;
     background-color: #007BFF;
     color: white;
@@ -64,10 +63,11 @@ button:hover {
 
 .reactions {
     display: flex;
-    justify-content: start; /* Align buttons horizontally */
+    justify-content: start;
     margin: 10px 0;
 }
 
-.comment-section {
-    margin-top: 10px;
+.comment-input {
+    width: 70%;
+    margin-right: 5px;
 }
