@@ -14,12 +14,16 @@ function loadPosts() {
 // Create a new post
 function createPost() {
   const postContent = document.getElementById('postContent').value;
+  const postImageInput = document.getElementById('postImage');
+  const postImage = postImageInput.files[0];
+
   const newPost = {
     content: postContent,
     timestamp: new Date().toLocaleString(),
     likes: 0,
     dislikes: 0,
-    comments: []
+    comments: [],
+    image: postImage ? URL.createObjectURL(postImage) : null // Create object URL if an image is uploaded
   };
 
   const posts = JSON.parse(localStorage.getItem('posts')) || [];
@@ -27,6 +31,7 @@ function createPost() {
   localStorage.setItem('posts', JSON.stringify(posts));
   renderPost(newPost);
   document.getElementById('postContent').value = ''; // Clear post input
+  postImageInput.value = ''; // Clear image input
 }
 
 // Render a single post
@@ -37,6 +42,14 @@ function renderPost(post) {
   const contentParagraph = document.createElement('p');
   contentParagraph.textContent = post.content;
   postDiv.appendChild(contentParagraph);
+
+  if (post.image) {
+    const img = document.createElement('img');
+    img.src = post.image;
+    img.alt = 'Post Image';
+    img.style.maxWidth = '100%'; // Responsive image
+    postDiv.appendChild(img);
+  }
 
   const timestamp = document.createElement('p');
   timestamp.textContent = `Posted on: ${post.timestamp}`;
