@@ -8,122 +8,134 @@ if (!loggedInUser) {
 // Load posts from localStorage
 function loadPosts() {
   const posts = JSON.parse(localStorage.getItem('posts')) || [];
-  posts.forEach(post => {
-    createPostElement(post.content, post.likes, post.dislikes, post.comments);
-  });
+  posts.forEach(post => renderPost(post));
 }
 
 // Create a new post
 function createPost() {
   const postContent = document.getElementById('postContent').value;
+  const newPost = {
+    content: postContent,
+    timestamp: new Date().toLocaleString(),
+    likes: 0,
+    dislikes: 0,
+    comments: []
+  };
 
-  if (postContent) {
-    const newPost = {
-      content: postContent,
-      likes: 0,
-      dislikes: 0,
-      comments: []
-    };
-    
-    // Save the post to localStorage
-    const posts = JSON.parse(localStorage.getItem('posts')) || [];
-    posts.push(newPost);
-    localStorage.setItem('posts', JSON.stringify(posts));
-    
-    createPostElement(newPost.content, newPost.likes, newPost.dislikes, newPost.comments);
-    document.getElementById('postContent').value = ''; // Clear post input
-  }
+  const posts = JSON.parse(localStorage.getItem('posts')) || [];
+  posts.push(newPost);
+  localStorage.setItem('posts', JSON.stringify(posts));
+  renderPost(newPost);
+  document.getElementById('postContent').value = ''; // Clear post input
 }
 
-// Create post element for display
-function createPostElement(content, likes, dislikes, comments) {
+// Render a single post
+function renderPost(post) {
   const postDiv = document.createElement('div');
   postDiv.classList.add('post');
 
   const contentParagraph = document.createElement('p');
-  contentParagraph.textContent = content;
+  contentParagraph.textContent = post.content;
   postDiv.appendChild(contentParagraph);
+
+  const timestamp = document.createElement('p');
+  timestamp.textContent = post.timestamp;
+  postDiv.appendChild(timestamp);
 
   // Reactions section
   const reactionsDiv = document.createElement('div');
   reactionsDiv.classList.add('reactions');
 
-  // Like button with small icon
+  // Like button
   const likeButton = document.createElement('button');
-  likeButton.classList.add('small-button');
-  likeButton.innerHTML = `<img src="like-icon.png" alt="Like" class="icon"> ${likes}`;
+  likeButton.textContent = `👍 ${post.likes}`;
   likeButton.onclick = function() {
-    likes++;
-    likeButton.innerHTML = `<img src="like-icon.png" alt="Like" class="icon"> ${likes}`;
-    updatePostInLocalStorage(content, likes, dislikes, comments); // Update in localStorage
+    post.likes++;
+    updatePostInStorage(post);
+    likeButton.textContent = `👍 ${post.likes}`;
   };
-
-  // Dislike button with small icon
+  
+  // Dislike button
   const dislikeButton = document.createElement('button');
-  dislikeButton.classList.add('small-button');
-  dislikeButton.innerHTML = `<img src="dislike-icon.png" alt="Dislike" class="icon"> ${dislikes}`;
+  dislikeButton.textContent = `👎 ${post.dislikes}`;
   dislikeButton.onclick = function() {
-    dislikes++;
-    dislikeButton.innerHTML = `<img src="dislike-icon.png" alt="Dislike" class="icon"> ${dislikes}`;
-    updatePostInLocalStorage(content, likes, dislikes, comments); // Update in localStorage
+    post.dislikes++;
+    updatePostInStorage(post);
+    dislikeButton.textContent = `👎 ${post.dislikes}`;
   };
 
-  // Append like and dislike buttons
   reactionsDiv.appendChild(likeButton);
   reactionsDiv.appendChild(dislikeButton);
+  postDiv.appendChild(reactionsDiv);
 
-  // Comment input
+  // Comment section
   const commentInput = document.createElement('input');
   commentInput.placeholder = 'Add a comment...';
-  commentInput.classList.add('comment-input');
-
-  // Comment button
+  
   const commentButton = document.createElement('button');
-  commentButton.classList.add('small-button');
   commentButton.textContent = 'Comment';
-
-  // Comments list
+  
   const commentsList = document.createElement('div');
-  commentsList.classList.add('comments-list');
-
-  // Append comment input and button under the reactions
-  reactionsDiv.appendChild(commentInput);
-  reactionsDiv.appendChild(commentButton);
-
-  // Append reactions and comments list to the post
-  postDiv.appendChild(reactionsDiv);
-  postDiv.appendChild(commentsList);
-  document.getElementById('posts').prepend(postDiv);
-
-  // Load existing comments
-  comments.forEach(comment => {
-    const commentDiv = document.createElement('p');
-    commentDiv.textContent = comment;
-    commentsList.appendChild(commentDiv);
-  });
-
-  // Handle comments
+  
   commentButton.onclick = function() {
     const commentText = commentInput.value;
     if (commentText) {
-      const commentDiv = document.createElement('p');
-      commentDiv.textContent = commentText;
-      commentsList.appendChild(commentDiv);
-      comments.push(commentText); // Store comment
+      const comment = { text: commentText, likes: 0, dislikes: 0 };
+      post.comments.push(comment);
+      updatePostInStorage(post);
+      renderComment(comment, commentsList);
       commentInput.value = ''; // Clear input
-      updatePostInLocalStorage(content, likes, dislikes, comments); // Update in localStorage
     }
   };
+
+  postDiv.appendChild(commentInput);
+  postDiv.appendChild(commentButton);
+  postDiv.appendChild(commentsList);
+  document.getElementById('posts').appendChild(postDiv);
+
+  // Render existing comments
+  post.comments.forEach(comment => renderComment(comment, commentsList));
+}
+
+// Render a single comment
+function renderComment(comment, commentsList) {
+  const commentDiv = document.createElement('div');
+  commentDiv.classList.add('comment');
+
+  const commentText = document.createElement('p');
+  commentText.textContent = comment.text;
+  commentDiv.appendChild(commentText);
+
+  // Comment reactions
+  const reactionsDiv = document.createElement('div');
+  reactionsDiv.classList.add('reactions');
+
+  const likeButton = document.createElement('button');
+  likeButton.textContent = `👍 ${comment.likes}`;
+  likeButton.onclick = function() {
+    comment.likes++;
+    likeButton.textContent = `👍 ${comment.likes}`;
+  };
+
+  const dislikeButton = document.createElement('button');
+  dislikeButton.textContent = `👎 ${comment.dislikes}`;
+  dislikeButton.onclick = function() {
+    comment.dislikes++;
+    dislikeButton.textContent = `👎 ${comment.dislikes}`;
+  };
+
+  reactionsDiv.appendChild(likeButton);
+  reactionsDiv.appendChild(dislikeButton);
+  commentDiv.appendChild(reactionsDiv);
+  commentsList.appendChild(commentDiv);
 }
 
 // Update post in localStorage
-function updatePostInLocalStorage(content, likes, dislikes, comments) {
-  const posts = JSON.parse(localStorage.getItem('posts')) || [];
-  const postIndex = posts.findIndex(post => post.content === content);
-  if (postIndex !== -1) {
-    posts[postIndex].likes = likes;
-    posts[postIndex].dislikes = dislikes;
-    posts[postIndex].comments = comments;
+function updatePostInStorage(updatedPost) {
+  const posts = JSON.parse(localStorage.getItem('posts'));
+  const index = posts.findIndex(post => post.timestamp === updatedPost.timestamp);
+  if (index !== -1) {
+    posts[index] = updatedPost;
     localStorage.setItem('posts', JSON.stringify(posts));
   }
 }
