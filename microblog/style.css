@@ -51,10 +51,6 @@ button:hover {
     margin: 10px 0;
 }
 
-.reactions button.active {
-    background-color: #e0e0e0; 
-}
-
 .comment-section {
     margin-top: 10px;
 }
