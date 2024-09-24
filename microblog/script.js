@@ -1,55 +1,87 @@
-function createPost(content, imageSrc, timestamp) {
-    const postElement = document.createElement('div');
-    postElement.classList.add('post');
-    
-    const postContent = document.createElement('p');
-    postContent.textContent = content;
-    
-    const postDate = document.createElement('small');
-    postDate.classList.add('timestamp');
-    postDate.textContent = timestamp;
-    
-    const postImage = document.createElement('img');
-    postImage.classList.add('post-image');
-    if (imageSrc) {
-        postImage.src = imageSrc;
-        postImage.style.display = 'block';
+let loggedIn = false;
+
+// Login function
+document.getElementById('loginButton').addEventListener('click', function() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // Simple authentication check (you can improve this with real validation)
+    if (username && password) {
+        loggedIn = true;
+        document.getElementById('authSection').style.display = 'none';
+        document.getElementById('postForm').style.display = 'block';
     } else {
-        postImage.style.display = 'none';
+        alert('Please enter a valid username and password.');
     }
-    
-    const likeButton = document.createElement('button');
-    likeButton.classList.add('like-button');
-    likeButton.innerHTML = '❤️ Like';
-    likeButton.addEventListener('click', function() {
-        this.classList.toggle('liked');
-        this.innerHTML = this.classList.contains('liked') ? '❤️ Liked' : '❤️ Like';
-    });
-    
-    postElement.appendChild(postContent);
-    postElement.appendChild(postDate);
-    postElement.appendChild(postImage);
-    postElement.appendChild(likeButton);
-    
-    return postElement;
-}
+});
 
-// Handle form submission
+// Handle post submission
 document.getElementById('postForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting the traditional way
+    event.preventDefault();
 
-    const postContent = document.getElementById('postContent').value.trim();
+    const postContent = document.getElementById('postContent').value;
     const postImage = document.getElementById('postImage').files[0];
-    
-    if (postContent) {
-        const postsContainer = document.getElementById('postsContainer');
-        
-        const timestamp = new Date().toLocaleString(); // Get current date and time
-        const imageSrc = postImage ? URL.createObjectURL(postImage) : null;
-        
-        const newPost = createPost(postContent, imageSrc, timestamp);
-        postsContainer.prepend(newPost); // Add new post to the top
-        document.getElementById('postContent').value = ''; // Clear the textarea
-        document.getElementById('postImage').value = ''; // Clear the file input
+
+    const postDiv = document.createElement('div');
+    postDiv.classList.add('post');
+
+    const contentParagraph = document.createElement('p');
+    contentParagraph.textContent = postContent;
+    postDiv.appendChild(contentParagraph);
+
+    if (postImage) {
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(postImage);
+        postDiv.appendChild(img);
     }
+
+    // Reaction section with emojis
+    const reactionsDiv = document.createElement('div');
+    reactionsDiv.classList.add('reactions');
+
+    const emojiButtons = ['👍', '❤️', '😢', '😡', '😂'];
+    const likeCounts = Array(emojiButtons.length).fill(0);
+
+    emojiButtons.forEach((emoji, index) => {
+        const button = document.createElement('button');
+        button.textContent = emoji + ' (0)';
+        button.classList.add('emoji-button');
+
+        button.addEventListener('click', function() {
+            likeCounts[index]++;
+            button.textContent = emoji + ` (${likeCounts[index]})`;
+        });
+
+        reactionsDiv.appendChild(button);
+    });
+
+    postDiv.appendChild(reactionsDiv);
+
+    // Comment section
+    const commentSection = document.createElement('div');
+    commentSection.classList.add('comment-section');
+    const commentInput = document.createElement('input');
+    commentInput.classList.add('comment-input');
+    commentInput.placeholder = 'Add a comment...';
+    
+    const commentButton = document.createElement('button');
+    commentButton.classList.add('comment-input-button');
+    commentButton.textContent = 'Comment';
+
+    commentButton.addEventListener('click', function() {
+        const commentText = commentInput.value;
+        if (commentText) {
+            const commentDiv = document.createElement('p');
+            commentDiv.textContent = commentText;
+            commentSection.appendChild(commentDiv);
+            commentInput.value = ''; // Clear input
+        }
+    });
+
+    commentSection.appendChild(commentInput);
+    commentSection.appendChild(commentButton);
+    postDiv.appendChild(commentSection);
+
+    document.getElementById('postsContainer').prepend(postDiv);
+    document.getElementById('postForm').reset(); // Reset form
 });
