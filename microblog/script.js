@@ -5,23 +5,48 @@ if (!loggedInUser) {
   window.location.href = 'index.html'; // Redirect to registration if not logged in
 }
 
+// Load posts from localStorage
+function loadPosts() {
+  const posts = JSON.parse(localStorage.getItem('posts')) || [];
+  posts.forEach(post => {
+    createPostElement(post.content, post.likes, post.dislikes, post.comments);
+  });
+}
+
 // Create a new post
 function createPost() {
   const postContent = document.getElementById('postContent').value;
 
+  if (postContent) {
+    const newPost = {
+      content: postContent,
+      likes: 0,
+      dislikes: 0,
+      comments: []
+    };
+    
+    // Save the post to localStorage
+    const posts = JSON.parse(localStorage.getItem('posts')) || [];
+    posts.push(newPost);
+    localStorage.setItem('posts', JSON.stringify(posts));
+    
+    createPostElement(newPost.content, newPost.likes, newPost.dislikes, newPost.comments);
+    document.getElementById('postContent').value = ''; // Clear post input
+  }
+}
+
+// Create post element for display
+function createPostElement(content, likes, dislikes, comments) {
   const postDiv = document.createElement('div');
   postDiv.classList.add('post');
 
   const contentParagraph = document.createElement('p');
-  contentParagraph.textContent = postContent;
+  contentParagraph.textContent = content;
   postDiv.appendChild(contentParagraph);
 
   // Reactions section
   const reactionsDiv = document.createElement('div');
   reactionsDiv.classList.add('reactions');
-
-  let likes = 0;
-  let dislikes = 0;
 
   // Like button with small icon
   const likeButton = document.createElement('button');
@@ -30,6 +55,7 @@ function createPost() {
   likeButton.onclick = function() {
     likes++;
     likeButton.innerHTML = `<img src="like-icon.png" alt="Like" class="icon"> ${likes}`;
+    updatePostInLocalStorage(content, likes, dislikes, comments); // Update in localStorage
   };
 
   // Dislike button with small icon
@@ -39,6 +65,7 @@ function createPost() {
   dislikeButton.onclick = function() {
     dislikes++;
     dislikeButton.innerHTML = `<img src="dislike-icon.png" alt="Dislike" class="icon"> ${dislikes}`;
+    updatePostInLocalStorage(content, likes, dislikes, comments); // Update in localStorage
   };
 
   // Append like and dislike buttons
@@ -62,11 +89,18 @@ function createPost() {
   // Append comment input and button under the reactions
   reactionsDiv.appendChild(commentInput);
   reactionsDiv.appendChild(commentButton);
-  
+
   // Append reactions and comments list to the post
   postDiv.appendChild(reactionsDiv);
   postDiv.appendChild(commentsList);
   document.getElementById('posts').prepend(postDiv);
+
+  // Load existing comments
+  comments.forEach(comment => {
+    const commentDiv = document.createElement('p');
+    commentDiv.textContent = comment;
+    commentsList.appendChild(commentDiv);
+  });
 
   // Handle comments
   commentButton.onclick = function() {
@@ -75,9 +109,24 @@ function createPost() {
       const commentDiv = document.createElement('p');
       commentDiv.textContent = commentText;
       commentsList.appendChild(commentDiv);
+      comments.push(commentText); // Store comment
       commentInput.value = ''; // Clear input
+      updatePostInLocalStorage(content, likes, dislikes, comments); // Update in localStorage
     }
   };
-
-  document.getElementById('postContent').value = ''; // Clear post input
 }
+
+// Update post in localStorage
+function updatePostInLocalStorage(content, likes, dislikes, comments) {
+  const posts = JSON.parse(localStorage.getItem('posts')) || [];
+  const postIndex = posts.findIndex(post => post.content === content);
+  if (postIndex !== -1) {
+    posts[postIndex].likes = likes;
+    posts[postIndex].dislikes = dislikes;
+    posts[postIndex].comments = comments;
+    localStorage.setItem('posts', JSON.stringify(posts));
+  }
+}
+
+// Load posts on page load
+loadPosts();
