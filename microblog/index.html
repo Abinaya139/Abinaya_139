@@ -16,6 +16,18 @@
     </div>
   </div>
   <div id="app">
+    <div id="feed">
+      <h2>Your Feed</h2>
+      <textarea id="postContent" placeholder="What's on your mind?" required></textarea>
+      <input type="file" id="postImage">
+      <button onclick="createPost()">Post</button>
+
+      <h3>Posts</h3>
+      <div id="posts"></div>
+    </div>
+  </div>
+
+  <div id="app">
         <div id="commentSection">
             <h2>Post Details</h2>
             <div id="postContent"></div>
