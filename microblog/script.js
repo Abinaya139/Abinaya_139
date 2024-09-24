@@ -41,23 +41,29 @@ function createPost() {
     dislikeButton.innerHTML = `<img src="dislike-icon.png" alt="Dislike" class="icon"> ${dislikes}`;
   };
 
-  // Comment input and button
+  // Append like and dislike buttons
+  reactionsDiv.appendChild(likeButton);
+  reactionsDiv.appendChild(dislikeButton);
+
+  // Comment input
   const commentInput = document.createElement('input');
   commentInput.placeholder = 'Add a comment...';
   commentInput.classList.add('comment-input');
 
+  // Comment button
   const commentButton = document.createElement('button');
   commentButton.classList.add('small-button');
   commentButton.textContent = 'Comment';
 
+  // Comments list
   const commentsList = document.createElement('div');
   commentsList.classList.add('comments-list');
 
-  // Append elements
-  reactionsDiv.appendChild(likeButton);
-  reactionsDiv.appendChild(dislikeButton);
+  // Append comment input and button under the reactions
   reactionsDiv.appendChild(commentInput);
   reactionsDiv.appendChild(commentButton);
+  
+  // Append reactions and comments list to the post
   postDiv.appendChild(reactionsDiv);
   postDiv.appendChild(commentsList);
   document.getElementById('posts').prepend(postDiv);
