@@ -18,7 +18,7 @@ h1, h2, h3 {
     text-align: center;
 }
 
-input[type="text"], input[type="password"], textarea {
+input[type="text"], textarea {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -47,30 +47,6 @@ button:hover {
     border-radius: 4px;
 }
 
-.reactions {
-    margin: 10px 0;
-}
-.reactions {
-    display: flex;
-    flex-direction: column; /* Arrange items vertically */
-    margin: 10px 0;
-}
-
-.reactions button {
-    margin: 5px 0; /* Space between buttons */
-}
-
-
 .comment-section {
     margin-top: 10px;
-}
-
-.comment-input {
-    width: 80%;
-    margin-top: 5px;
-    padding: 5px;
-}
-
-.comment-input-button {
-    padding: 5px;
 }
