@@ -22,8 +22,8 @@
       const password = document.getElementById('password').value;
 
       if (username && password) {
-        localStorage.setItem('username', username); // Save username to localStorage
-        window.location.href = 'feed.html'; // Redirect to the feed page
+        localStorage.setItem('username', username);
+        window.location.href = 'feed.html';
       } else {
         alert('Please enter a valid username and password.');
       }
