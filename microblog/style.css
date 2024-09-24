@@ -1,56 +1,100 @@
 body {
-  font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
 }
 
-.container {
-  width: 80%;
-  margin: 0 auto;
+#app {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.post, .comment {
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin: 10px 0;
+h1 {
+    text-align: center;
+    color: #333;
 }
+
+textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    resize: none;
+}
+
+input[type="file"] {
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+.post {
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.post img {
+    display: block;
+    margin: 10px 0;
+}
+
+.reactions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
 .small-button {
     background: none;
     border: none;
     cursor: pointer;
-    margin: 5px;
+    font-size: 14px;
 }
 
-.icon {
-    width: 20px; /* Adjust icon size */
-    height: 20px; /* Adjust icon size */
-    vertical-align: middle; /* Align with text */
-}
-.small-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin: 5px;
+.small-button img.icon {
+    width: 20px;
+    vertical-align: middle;
+    margin-right: 5px;
 }
 
-.icon {
-  width: 16px; /* Adjust the size of your icons */
-  height: 16px; /* Adjust the size of your icons */
-  vertical-align: middle; /* Align with text */
+.comment {
+    background-color: #e9ecef;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
 }
 
-.reactions {
-  display: flex;
-  align-items: center;
+.comment input {
+    width: calc(100% - 100px);
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
 }
 
-.reactions {
-  margin-top: 10px;
-}
-
-button {
-  margin-right: 5px;
-}
-
-input {
-  margin-top: 10px;
-  width: calc(100% - 100px);
+.comments-list {
+    margin-top: 10px;
 }
