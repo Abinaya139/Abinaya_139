@@ -23,6 +23,7 @@
 
       if (username && password) {
         localStorage.setItem('username', username);
+        localStorage.setItem('posts', JSON.stringify([])); // Initialize posts
         window.location.href = 'feed.html';
       } else {
         alert('Please enter a valid username and password.');
