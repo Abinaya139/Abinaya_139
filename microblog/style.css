@@ -58,6 +58,7 @@ button:hover {
   border: none;
   cursor: pointer;
   padding: 5px;
+  margin-top: 5px; /* Adds space above the comment button */
 }
 
 .icon {
@@ -71,6 +72,7 @@ button:hover {
 }
 
 .comment-input {
+  margin-top: 5px; /* Space above the input */
   margin-right: 5px;
 }
 
