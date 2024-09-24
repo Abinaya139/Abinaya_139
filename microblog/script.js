@@ -1,14 +1,14 @@
 function createPost(content, imageSrc, timestamp) {
     const postElement = document.createElement('div');
     postElement.classList.add('post');
-    
+
     const postContent = document.createElement('p');
     postContent.textContent = content;
-    
+
     const postDate = document.createElement('small');
     postDate.classList.add('timestamp');
     postDate.textContent = timestamp;
-    
+
     const postImage = document.createElement('img');
     postImage.classList.add('post-image');
     if (imageSrc) {
@@ -17,22 +17,30 @@ function createPost(content, imageSrc, timestamp) {
     } else {
         postImage.style.display = 'none';
     }
-    
+
     const likeButton = document.createElement('button');
     likeButton.classList.add('like-button');
-    likeButton.innerHTML = '❤️ Like';
+    likeButton.innerHTML = '❤️ Like (0)';
+    likeButton.likesCount = 0; // Initialize likes count
     likeButton.addEventListener('click', function() {
         this.classList.toggle('liked');
-        this.innerHTML = this.classList.contains('liked') ? '❤️ Liked' : '❤️ Like';
+        if (this.classList.contains('liked')) {
+            this.likesCount++;
+            this.innerHTML = `❤️ Liked (${this.likesCount})`;
+        } else {
+            this.likesCount--;
+            this.innerHTML = `❤️ Like (${this.likesCount})`;
+        }
     });
-    
+
     postElement.appendChild(postContent);
     postElement.appendChild(postDate);
     postElement.appendChild(postImage);
     postElement.appendChild(likeButton);
-    
+
     return postElement;
 }
+
 
 // Handle form submission
 document.getElementById('postForm').addEventListener('submit', function(event) {
