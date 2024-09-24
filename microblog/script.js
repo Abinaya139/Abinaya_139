@@ -14,19 +14,24 @@ function loadPosts() {
 // Create a new post
 function createPost() {
   const postContent = document.getElementById('postContent').value;
+  const postImageInput = document.getElementById('postImage');
+  const postImage = postImageInput.files[0];
+
   const newPost = {
     content: postContent,
     timestamp: new Date().toLocaleString(),
     likes: 0,
     dislikes: 0,
-    comments: []
+    comments: [],
+    image: postImage ? URL.createObjectURL(postImage) : null
   };
 
   const posts = JSON.parse(localStorage.getItem('posts')) || [];
   posts.push(newPost);
   localStorage.setItem('posts', JSON.stringify(posts));
   renderPost(newPost);
-  document.getElementById('postContent').value = ''; // Clear post input
+  document.getElementById('postContent').value = '';
+  postImageInput.value = '';
 }
 
 // Render a single post
@@ -38,6 +43,14 @@ function renderPost(post) {
   contentParagraph.textContent = post.content;
   postDiv.appendChild(contentParagraph);
 
+  if (post.image) {
+    const img = document.createElement('img');
+    img.src = post.image;
+    img.alt = 'Post Image';
+    img.style.maxWidth = '100%'; // Responsive image
+    postDiv.appendChild(img);
+  }
+
   const timestamp = document.createElement('p');
   timestamp.textContent = `Posted on: ${post.timestamp}`;
   postDiv.appendChild(timestamp);
@@ -46,19 +59,17 @@ function renderPost(post) {
   const reactionsDiv = document.createElement('div');
   reactionsDiv.classList.add('reactions');
 
-  // Like button with small icon
+  // Like button
   const likeButton = document.createElement('button');
-  likeButton.classList.add('small-button');
   likeButton.innerHTML = `<img src="like-icon.png" alt="Like" class="icon"> ${post.likes}`;
   likeButton.onclick = function() {
     post.likes++;
     updatePostInStorage(post);
     likeButton.innerHTML = `<img src="like-icon.png" alt="Like" class="icon"> ${post.likes}`;
   };
-  
-  // Dislike button with small icon
+
+  // Dislike button
   const dislikeButton = document.createElement('button');
-  dislikeButton.classList.add('small-button');
   dislikeButton.innerHTML = `<img src="dislike-icon.png" alt="Dislike" class="icon"> ${post.dislikes}`;
   dislikeButton.onclick = function() {
     post.dislikes++;
@@ -73,12 +84,12 @@ function renderPost(post) {
   // Comment section
   const commentInput = document.createElement('input');
   commentInput.placeholder = 'Add a comment...';
-  
+
   const commentButton = document.createElement('button');
   commentButton.textContent = 'Comment';
-  
+
   const commentsList = document.createElement('div');
-  
+
   commentButton.onclick = function() {
     const commentText = commentInput.value;
     if (commentText) {
