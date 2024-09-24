@@ -41,23 +41,6 @@ body {
   display: flex;
   align-items: center;
 }
-.small-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin: 5px;
-}
-
-.icon {
-  width: 16px; /* Adjust the size of your icons */
-  height: 16px; /* Adjust the size of your icons */
-  vertical-align: middle; /* Align with text */
-}
-
-.reactions {
-  display: flex;
-  align-items: center;
-}
 
 .reactions {
   margin-top: 10px;
