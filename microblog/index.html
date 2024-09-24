@@ -8,8 +8,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>Create a post</h1>
-        <form id="postForm">
+        <h1>Create a Post</h1>
+        <div id="authSection">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button id="loginButton">Login</button>
+        </div>
+        <form id="postForm" style="display: none;">
             <textarea id="postContent" placeholder="What's on your mind?" required></textarea>
             <input type="file" id="postImage" accept="image/*">
             <button type="submit">Post</button>
@@ -17,6 +22,7 @@
         <div id="postsContainer">
             <!-- Posts will be dynamically added here -->
         </div>
+        <button id="viewPosts">View Posts</button>
     </div>
     <script src="script.js"></script>
 </body>
