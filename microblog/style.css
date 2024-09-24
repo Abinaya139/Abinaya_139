@@ -53,6 +53,31 @@ button:hover {
 .small-button:hover {
     background-color: #d0d0d0;
 }
+.small-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.icon {
+  width: 20px; /* Set your desired icon size */
+  height: 20px;
+  vertical-align: middle; /* Align icons with text */
+}
+
+.reactions {
+  margin-top: 10px;
+}
+
+.comment-input {
+  margin-right: 5px;
+}
+
+.comments-list {
+  margin-top: 10px;
+  font-size: 0.9em; /* Smaller font for comments */
+}
 
 .post {
     border: 1px solid #ddd;
