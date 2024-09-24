@@ -32,15 +32,8 @@ function createPost() {
   const reactionsDiv = document.createElement('div');
   reactionsDiv.classList.add('reactions');
 
-  const emojis = [
-    { symbol: '👍', name: 'Like' },
-    { symbol: '❤️', name: 'Love' },
-    { symbol: '😂', name: 'Haha' },
-    { symbol: '😢', name: 'Sad' },
-    { symbol: '😡', name: 'Angry' }
-  ];
-
-  emojis.forEach(emoji => {
+  const emojis = [ {'👍'},{'❤️'},{'😂'},{'😢'},{'😡'} ];
+   emojis.forEach(emoji => {
     const button = document.createElement('button');
     button.textContent = emoji.symbol + ' ' + emoji.name;
     button.onclick = function() {
