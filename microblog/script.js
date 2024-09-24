@@ -46,22 +46,24 @@ function renderPost(post) {
   const reactionsDiv = document.createElement('div');
   reactionsDiv.classList.add('reactions');
 
-  // Like button
+  // Like button with small icon
   const likeButton = document.createElement('button');
-  likeButton.innerHTML = `👍 ${post.likes}`;
+  likeButton.classList.add('small-button');
+  likeButton.innerHTML = `<img src="like-icon.png" alt="Like" class="icon"> ${post.likes}`;
   likeButton.onclick = function() {
     post.likes++;
     updatePostInStorage(post);
-    likeButton.innerHTML = `👍 ${post.likes}`;
+    likeButton.innerHTML = `<img src="like-icon.png" alt="Like" class="icon"> ${post.likes}`;
   };
   
-  // Dislike button
+  // Dislike button with small icon
   const dislikeButton = document.createElement('button');
-  dislikeButton.innerHTML = `👎 ${post.dislikes}`;
+  dislikeButton.classList.add('small-button');
+  dislikeButton.innerHTML = `<img src="dislike-icon.png" alt="Dislike" class="icon"> ${post.dislikes}`;
   dislikeButton.onclick = function() {
     post.dislikes++;
     updatePostInStorage(post);
-    dislikeButton.innerHTML = `👎 ${post.dislikes}`;
+    dislikeButton.innerHTML = `<img src="dislike-icon.png" alt="Dislike" class="icon"> ${post.dislikes}`;
   };
 
   reactionsDiv.appendChild(likeButton);
@@ -75,4 +77,76 @@ function renderPost(post) {
   const commentButton = document.createElement('button');
   commentButton.textContent = 'Comment';
   
-  const commentsList = document.createElement('div
+  const commentsList = document.createElement('div');
+  
+  commentButton.onclick = function() {
+    const commentText = commentInput.value;
+    if (commentText) {
+      const comment = { text: commentText, timestamp: new Date().toLocaleString(), likes: 0, dislikes: 0 };
+      post.comments.push(comment);
+      updatePostInStorage(post);
+      renderComment(comment, commentsList);
+      commentInput.value = ''; // Clear input
+    }
+  };
+
+  postDiv.appendChild(commentInput);
+  postDiv.appendChild(commentButton);
+  postDiv.appendChild(commentsList);
+  document.getElementById('posts').appendChild(postDiv);
+
+  // Render existing comments
+  post.comments.forEach(comment => renderComment(comment, commentsList));
+}
+
+// Render a single comment
+function renderComment(comment, commentsList) {
+  const commentDiv = document.createElement('div');
+  commentDiv.classList.add('comment');
+
+  const commentText = document.createElement('p');
+  commentText.textContent = comment.text;
+  commentDiv.appendChild(commentText);
+
+  const timestamp = document.createElement('p');
+  timestamp.textContent = `Commented on: ${comment.timestamp}`;
+  commentDiv.appendChild(timestamp);
+
+  // Comment reactions
+  const reactionsDiv = document.createElement('div');
+  reactionsDiv.classList.add('reactions');
+
+  // Like button for comment
+  const likeButton = document.createElement('button');
+  likeButton.innerHTML = `<img src="like-icon.png" alt="Like" class="icon"> ${comment.likes}`;
+  likeButton.onclick = function() {
+    comment.likes++;
+    likeButton.innerHTML = `<img src="like-icon.png" alt="Like" class="icon"> ${comment.likes}`;
+  };
+
+  // Dislike button for comment
+  const dislikeButton = document.createElement('button');
+  dislikeButton.innerHTML = `<img src="dislike-icon.png" alt="Dislike" class="icon"> ${comment.dislikes}`;
+  dislikeButton.onclick = function() {
+    comment.dislikes++;
+    dislikeButton.innerHTML = `<img src="dislike-icon.png" alt="Dislike" class="icon"> ${comment.dislikes}`;
+  };
+
+  reactionsDiv.appendChild(likeButton);
+  reactionsDiv.appendChild(dislikeButton);
+  commentDiv.appendChild(reactionsDiv);
+  commentsList.appendChild(commentDiv);
+}
+
+// Update post in localStorage
+function updatePostInStorage(updatedPost) {
+  const posts = JSON.parse(localStorage.getItem('posts'));
+  const index = posts.findIndex(post => post.timestamp === updatedPost.timestamp);
+  if (index !== -1) {
+    posts[index] = updatedPost;
+    localStorage.setItem('posts', JSON.stringify(posts));
+  }
+}
+
+// Load posts on page load
+loadPosts();
