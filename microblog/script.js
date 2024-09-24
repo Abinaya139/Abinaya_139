@@ -5,7 +5,7 @@ if (!loggedInUser) {
   window.location.href = 'index.html'; // Redirect to registration if not logged in
 }
 
-// Load posts from localStorage
+// Load posts from localStorage on page load
 function loadPosts() {
   const posts = JSON.parse(localStorage.getItem('posts')) || [];
   posts.forEach(post => renderPost(post));
@@ -39,7 +39,7 @@ function renderPost(post) {
   postDiv.appendChild(contentParagraph);
 
   const timestamp = document.createElement('p');
-  timestamp.textContent = post.timestamp;
+  timestamp.textContent = `Posted on: ${post.timestamp}`;
   postDiv.appendChild(timestamp);
 
   // Reactions section
@@ -48,20 +48,20 @@ function renderPost(post) {
 
   // Like button
   const likeButton = document.createElement('button');
-  likeButton.textContent = `👍 ${post.likes}`;
+  likeButton.innerHTML = `👍 ${post.likes}`;
   likeButton.onclick = function() {
     post.likes++;
     updatePostInStorage(post);
-    likeButton.textContent = `👍 ${post.likes}`;
+    likeButton.innerHTML = `👍 ${post.likes}`;
   };
   
   // Dislike button
   const dislikeButton = document.createElement('button');
-  dislikeButton.textContent = `👎 ${post.dislikes}`;
+  dislikeButton.innerHTML = `👎 ${post.dislikes}`;
   dislikeButton.onclick = function() {
     post.dislikes++;
     updatePostInStorage(post);
-    dislikeButton.textContent = `👎 ${post.dislikes}`;
+    dislikeButton.innerHTML = `👎 ${post.dislikes}`;
   };
 
   reactionsDiv.appendChild(likeButton);
@@ -80,7 +80,7 @@ function renderPost(post) {
   commentButton.onclick = function() {
     const commentText = commentInput.value;
     if (commentText) {
-      const comment = { text: commentText, likes: 0, dislikes: 0 };
+      const comment = { text: commentText, timestamp: new Date().toLocaleString(), likes: 0, dislikes: 0 };
       post.comments.push(comment);
       updatePostInStorage(post);
       renderComment(comment, commentsList);
@@ -106,22 +106,26 @@ function renderComment(comment, commentsList) {
   commentText.textContent = comment.text;
   commentDiv.appendChild(commentText);
 
+  const timestamp = document.createElement('p');
+  timestamp.textContent = `Commented on: ${comment.timestamp}`;
+  commentDiv.appendChild(timestamp);
+
   // Comment reactions
   const reactionsDiv = document.createElement('div');
   reactionsDiv.classList.add('reactions');
 
   const likeButton = document.createElement('button');
-  likeButton.textContent = `👍 ${comment.likes}`;
+  likeButton.innerHTML = `👍 ${comment.likes}`;
   likeButton.onclick = function() {
     comment.likes++;
-    likeButton.textContent = `👍 ${comment.likes}`;
+    likeButton.innerHTML = `👍 ${comment.likes}`;
   };
 
   const dislikeButton = document.createElement('button');
-  dislikeButton.textContent = `👎 ${comment.dislikes}`;
+  dislikeButton.innerHTML = `👎 ${comment.dislikes}`;
   dislikeButton.onclick = function() {
     comment.dislikes++;
-    dislikeButton.textContent = `👎 ${comment.dislikes}`;
+    dislikeButton.innerHTML = `👎 ${comment.dislikes}`;
   };
 
   reactionsDiv.appendChild(likeButton);
