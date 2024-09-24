@@ -52,25 +52,19 @@
       const reactionsDiv = document.createElement('div');
       reactionsDiv.classList.add('reactions');
 
-      let likes = 0;
-      let dislikes = 0;
+      const emojis = [{'👍'}, {'❤️'},{'😂'},{'😢'},{'😡'}];
 
-      const likeButton = document.createElement('button');
-      likeButton.innerHTML = `👍 Like (${likes})`;
-      likeButton.onclick = function() {
-        likes++;
-        likeButton.innerHTML = `👍 Like (${likes})`;
-      };
+      emojis.forEach(emoji => {
+        const button = document.createElement('button');
+        button.innerHTML = emoji.symbol; // Only show the emoji
+        button.classList.add('emoji-button');
+        button.onclick = function() {
+          button.classList.toggle('active');
+          button.style.backgroundColor = button.classList.contains('active') ? '#e0e0e0' : ''; // Highlight when active
+        };
+        reactionsDiv.appendChild(button);
+      });
 
-      const dislikeButton = document.createElement('button');
-      dislikeButton.innerHTML = `👎 Dislike (${dislikes})`;
-      dislikeButton.onclick = function() {
-        dislikes++;
-        dislikeButton.innerHTML = `👎 Dislike (${dislikes})`;
-      };
-
-      reactionsDiv.appendChild(likeButton);
-      reactionsDiv.appendChild(dislikeButton);
       postDiv.appendChild(reactionsDiv);
 
       // Comment section
