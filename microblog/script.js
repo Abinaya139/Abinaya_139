@@ -56,10 +56,35 @@ function createPost(content, imageSrc, timestamp) {
         }
     });
 
+    const commentCountDisplay = document.createElement('small');
+    commentCountDisplay.textContent = 'Comments (0)';
+
+    const commentInput = document.createElement('input');
+    commentInput.type = 'text';
+    commentInput.placeholder = 'Add a comment...';
+    
+    const commentButton = document.createElement('button');
+    commentButton.textContent = 'Comment';
+    commentButton.addEventListener('click', function() {
+        if (commentInput.value.trim()) {
+            const commentList = document.createElement('div');
+            commentList.textContent = `${currentUser}: ${commentInput.value.trim()}`;
+            postElement.appendChild(commentList);
+            commentInput.value = '';
+
+            // Update comment count
+            const currentCommentCount = parseInt(commentCountDisplay.textContent.match(/\d+/)[0]) + 1;
+            commentCountDisplay.textContent = `Comments (${currentCommentCount})`;
+        }
+    });
+
     postElement.appendChild(postContent);
     postElement.appendChild(postDate);
     postElement.appendChild(postImage);
     postElement.appendChild(likeButton);
+    postElement.appendChild(commentCountDisplay);
+    postElement.appendChild(commentInput);
+    postElement.appendChild(commentButton);
 
     return postElement;
 }
