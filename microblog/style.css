@@ -50,6 +50,16 @@ button:hover {
 .reactions {
     margin: 10px 0;
 }
+.reactions {
+    display: flex;
+    flex-direction: column; /* Arrange items vertically */
+    margin: 10px 0;
+}
+
+.reactions button {
+    margin: 5px 0; /* Space between buttons */
+}
+
 
 .comment-section {
     margin-top: 10px;
