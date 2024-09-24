@@ -8,78 +8,13 @@
 </head>
 <body>
   <div id="app">
-    <h2>Your Feed</h2>
+    <h1>Your Feed</h1>
     <textarea id="postContent" placeholder="What's on your mind?" required></textarea>
     <button onclick="createPost()">Post</button>
 
-    <h3>Posts</h3>
     <div id="posts"></div>
   </div>
 
-  <script>
-    function createPost() {
-      const postContent = document.getElementById('postContent').value;
-
-      const postDiv = document.createElement('div');
-      postDiv.classList.add('post');
-
-      const contentParagraph = document.createElement('p');
-      contentParagraph.textContent = postContent;
-      postDiv.appendChild(contentParagraph);
-
-      // Reactions section
-      const reactionsDiv = document.createElement('div');
-      reactionsDiv.classList.add('reactions');
-
-      let likes = 0;
-      let dislikes = 0;
-
-      const likeButton = document.createElement('button');
-      likeButton.classList.add('small-button');
-      likeButton.innerHTML = `👍 ${likes}`;
-      likeButton.onclick = function() {
-        likes++;
-        likeButton.innerHTML = `👍 ${likes}`;
-      };
-
-      const dislikeButton = document.createElement('button');
-      dislikeButton.classList.add('small-button');
-      dislikeButton.innerHTML = `👎 ${dislikes}`;
-      dislikeButton.onclick = function() {
-        dislikes++;
-        dislikeButton.innerHTML = `👎 ${dislikes}`;
-      };
-
-      const commentInput = document.createElement('input');
-      commentInput.placeholder = 'Add a comment...';
-      commentInput.classList.add('comment-input');
-
-      const commentButton = document.createElement('button');
-      commentButton.classList.add('small-button');
-      commentButton.textContent = 'Comment';
-
-      const commentsList = document.createElement('div');
-      reactionsDiv.appendChild(likeButton);
-      reactionsDiv.appendChild(dislikeButton);
-      reactionsDiv.appendChild(commentInput);
-      reactionsDiv.appendChild(commentButton);
-
-      postDiv.appendChild(reactionsDiv);
-      postDiv.appendChild(commentsList);
-      document.getElementById('posts').prepend(postDiv);
-
-      commentButton.onclick = function() {
-        const commentText = commentInput.value;
-        if (commentText) {
-          const commentDiv = document.createElement('p');
-          commentDiv.textContent = commentText;
-          commentsList.appendChild(commentDiv);
-          commentInput.value = ''; // Clear input
-        }
-      };
-
-      document.getElementById('postContent').value = ''; // Clear post input
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
