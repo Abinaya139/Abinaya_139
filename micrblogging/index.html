@@ -1,1 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Microblogging App</title>
+</head>
+<body>
+    <div id="app">
+        <div id="alert-box" class="alert"></div>
+
+        <div class="page" id="login-page">
+            <h2>Login / Signup</h2>
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button onclick="signup()">Login / Signup</button>
+        </div>
+
+        <div class="page" id="home-page" style="display: none;">
+            <h2>Welcome, <span id="user-id"></span>!</h2>
+            <button onclick="logout()">Logout</button>
+            <h3>Create a Post</h3>
+            <textarea id="post-text" placeholder="What's on your mind?" required></textarea>
+            <input type="file" id="post-image" accept="image/*">
+            <button onclick="createPost()">Post</button>
+
+            <h3>Your Feed</h3>
+            <div id="feed"></div>
+
+            <h3>Follow Users</h3>
+            <div id="follow-users-list"></div>
+
+            <h3>Your Status</h3>
+            <p>Followers: <span id="follower-count">0</span></p>
+            <p>Following: <span id="following-count">0</span></p>
+        </div>
+
+        <div class="page" id="comments" style="display: none;">
+            <h3>Comments</h3>
+            <div id="comment-section"></div>
+            <input type="text" id="new-comment" placeholder="Add a comment">
+            <button onclick="addComment(currentPostId)">Submit Comment</button>
+            <button onclick="showPage('home-page')">Back</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
 
