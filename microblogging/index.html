@@ -14,16 +14,16 @@
             <h2>Login / Signup</h2>
             <input type="text" id="username" placeholder="Username" required>
             <input type="password" id="password" placeholder="Password" required>
-            <button onclick="signup()">Login / Signup</button>
+            <button id="login-btn">Login / Signup</button>
         </div>
 
         <div class="page" id="home-page" style="display: none;">
             <h2>Welcome, <span id="user-id"></span>!</h2>
-            <button onclick="logout()">Logout</button>
+            <button id="logout-btn">Logout</button>
             <h3>Create a Post</h3>
             <textarea id="post-text" placeholder="What's on your mind?" required></textarea>
             <input type="file" id="post-image" accept="image/*">
-            <button onclick="createPost()">Post</button>
+            <button id="post-btn">Post</button>
 
             <h3>Your Feed</h3>
             <div id="feed"></div>
@@ -40,8 +40,8 @@
             <h3>Comments</h3>
             <div id="comment-section"></div>
             <input type="text" id="new-comment" placeholder="Add a comment">
-            <button onclick="addComment(currentPostId)">Submit Comment</button>
-            <button onclick="showPage('home-page')">Back</button>
+            <button id="submit-comment-btn">Submit Comment</button>
+            <button id="back-btn">Back</button>
         </div>
     </div>
     <script src="script.js"></script>
