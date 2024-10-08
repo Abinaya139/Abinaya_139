@@ -1,9 +1,9 @@
 const menuItems = [
-    { id: 1, name: "Margherita Pizza", price: 12.99 },
-    { id: 2, name: "Pepperoni Pizza", price: 14.99 },
-    { id: 3, name: "Caesar Salad", price: 9.99 },
-    { id: 4, name: "Spaghetti Carbonara", price: 13.99 },
-    { id: 5, name: "Cheeseburger", price: 11.99 },
+    { id: 1, name: "Margherita Pizza", price: 75.99 },
+    { id: 2, name: "Pepperoni Pizza", price: 50.99 },
+    { id: 3, name: "Caesar Salad", price: 10.99 },
+    { id: 4, name: "Spaghetti Carbonara", price: 20.99 },
+    { id: 5, name: "Cheeseburger", price: 25.99 },
 ];
 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
