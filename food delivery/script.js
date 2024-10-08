@@ -8,10 +8,24 @@ const menuItems = [
 
 const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+function showHome() {
+    document.getElementById('home').style.display = 'block';
+    document.getElementById('menu').style.display = 'none';
+    renderCart();
+}
+
+function showMenu() {
+    document.getElementById('home').style.display = 'none';
+    document.getElementById('menu').style.display = 'block';
+    renderMenu();
+}
+
 function renderMenu() {
     const menuList = document.getElementById("menu-items");
+    menuList.innerHTML = ""; // Clear previous items
     menuItems.forEach(item => {
         const li = document.createElement("li");
+        li.className = "menu-item";
         li.innerHTML = `
             ${item.name} - $${item.price.toFixed(2)} 
             <button onclick="addToCart(${item.id})">Add to Cart</button>
@@ -44,7 +58,7 @@ function renderCart() {
     cart.forEach(item => {
         totalPrice += item.price * item.quantity;
         const li = document.createElement("li");
-        li.innerHTML = ${item.name} - $${item.price.toFixed(2)} x ${item.quantity};
+        li.innerHTML = `${item.name} - $${item.price.toFixed(2)} x ${item.quantity}`;
         cartList.appendChild(li);
     });
 
@@ -59,9 +73,9 @@ document.getElementById("place-order").addEventListener("click", () => {
 
     let orderSummary = "Your Order:\n";
     cart.forEach(item => {
-        orderSummary += ${item.name} - $${item.price.toFixed(2)} x ${item.quantity}\n;
+        orderSummary += `${item.name} - $${item.price.toFixed(2)} x ${item.quantity}\n`;
     });
-    orderSummary += Total: $${document.getElementById("total-price").innerText};
+    orderSummary += `Total: $${document.getElementById("total-price").innerText}`;
 
     if (confirm(orderSummary + "\nDo you want to place this order?")) {
         alert("Order placed successfully!");
