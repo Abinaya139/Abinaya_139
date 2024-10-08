@@ -41,6 +41,6 @@ function placeOrder() {
     cart = [];
     total = 0;
     updateCartDisplay();
-    showHome(); // Go back to home after placing the order
+    showHome(); 
 }
 
