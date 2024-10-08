@@ -6,7 +6,7 @@ const menuItems = [
     { id: 5, name: "Cheeseburger", price: 11.99 },
 ];
 
-const cart = JSON.parse(localStorage.getItem('cart')) || [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 function showHome() {
     document.getElementById('home').style.display = 'block';
