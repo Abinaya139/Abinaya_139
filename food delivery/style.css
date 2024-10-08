@@ -65,12 +65,12 @@ h2 {
     color: #666;
 }
 
-#menu-items, #cart-items {
+#menu-items, #cart-items, #order-list, #review-list {
     list-style: none;
     padding: 0;
 }
 
-#menu-items li, #cart-items li {
+#menu-items li, #cart-items li, #order-list li, #review-list li {
     background: white;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -93,6 +93,15 @@ button {
 
 button:hover {
     background: #218838;
+}
+
+textarea {
+    width: 100%;
+    height: 60px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 footer {
