@@ -15,6 +15,8 @@
             <li><a href="#" onclick="showHome()">Home</a></li>
             <li><a href="#" onclick="showMenu()">Menu</a></li>
             <li><a href="#" onclick="showCart()">Your Cart</a></li>
+            <li><a href="#" onclick="showOrderHistory()">Order History</a></li>
+            <li><a href="#" onclick="showReviews()">Customer Reviews</a></li>
         </ul>
     </nav>
 </header>
@@ -24,7 +26,7 @@
     <h2>Featured Restaurant</h2>
     <div class="restaurant-card">
         <img src="images/restaurant.jpg" alt="Restaurant ABC" />
-        <h3>Restaurant ABC</h3><br></br>
+        <h3>Restaurant ABC</h3>
         <p>Enjoy delicious meals from Restaurant ABC, known for its fresh ingredients and vibrant flavors.</p>
         <a href="#" onclick="showMenu()">View Menu</a>
     </div>
@@ -42,6 +44,20 @@
     <ul id="cart-items"></ul>
     <p>Total: $<span id="total-price">0.00</span></p>
     <button id="place-order" onclick="placeOrder()">Place Order</button>
+</section>
+
+<!-- Order History Page -->
+<section id="order-history" class="view" style="display: none;">
+    <h2>Order History</h2>
+    <ul id="order-list"></ul>
+</section>
+
+<!-- Customer Reviews Page -->
+<section id="reviews" class="view" style="display: none;">
+    <h2>Customer Reviews</h2>
+    <ul id="review-list"></ul>
+    <textarea id="review-input" placeholder="Leave your review here..."></textarea>
+    <button onclick="submitReview()">Submit Review</button>
 </section>
 
 <footer>
