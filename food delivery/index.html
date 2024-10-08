@@ -3,88 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Delivery Service</title>
+    <title>Food Delivery</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <h1>Restaurant XYZ</h1>
+        <p>Order your favorite meals from Restaurant XYZ!</p>
+    </header>
 
-<header>
-    <h1>Food Delivery</h1>
-    <nav>
-        <ul>
-            <li><a href="#" onclick="showHome()">Home</a></li>
-            <li><a href="#" onclick="showMenu()">Menu</a></li>
-        </ul>
-    </nav>
-</header>
+    <main>
+        <section class="menu">
+            <h2>Our Menu</h2>
+            <ul id="menu-items">
+                <!-- Menu items will be injected here via JavaScript -->
+            </ul>
+        </section>
 
-<!-- Home Page -->
-<section id="home" class="view">
-    <h2>Featured Restaurants</h2>
-    <div class="restaurant-card">
-        <img src="restaurant1.jpg" alt="Restaurant 1">
-        <h3>Restaurant Name 1</h3>
-        <p>Short description of the restaurant.</p>
-        <a href="#" onclick="showMenu()">View Menu</a>
-    </div>
-    <div class="restaurant-card">
-        <img src="restaurant2.jpg" alt="Restaurant 2">
-        <h3>Restaurant Name 2</h3>
-        <p>Short description of the restaurant.</p>
-        <a href="#" onclick="showMenu()">View Menu</a>
-    </div>
-</section>
+        <section class="cart">
+            <h2>Your Cart</h2>
+            <ul id="cart-items">
+                <!-- Cart items will be injected here -->
+            </ul>
+            <div class="total">
+                <p>Total: $<span id="total-price">0.00</span></p>
+                <button id="place-order">Place Order</button>
+            </div>
+        </section>
+    </main>
 
-<!-- Menu Page -->
-<section id="menu" class="view" style="display: none;">
-    <h2>Menu Items</h2>
+    <footer>
+        <p>&copy; 2024 Food Delivery - Restaurant XYZ</p>
+    </footer>
 
-    <!-- Pizza Section -->
-    <h3>Pizza</h3>
-    <div class="menu-item">
-        <img src="pizza1.jpg" alt="Pizza Margherita">
-        <h4>Pizza Margherita</h4>
-        <p>Classic pizza with mozzarella and basil.</p>
-        <p>Price: $12.00</p>
-        <button onclick="addToCart('Pizza Margherita', 12)">Add to Cart</button>
-    </div>
-    <div class="menu-item">
-        <img src="pizza2.jpg" alt="Pepperoni Pizza">
-        <h4>Pepperoni Pizza</h4>
-        <p>Delicious pizza topped with pepperoni slices.</p>
-        <p>Price: $14.00</p>
-        <button onclick="addToCart('Pepperoni Pizza', 14)">Add to Cart</button>
-    </div>
-
-    <!-- Burger Section -->
-    <h3>Burgers</h3>
-    <div class="menu-item">
-        <img src="burger1.jpg" alt="Cheeseburger">
-        <h4>Cheeseburger</h4>
-        <p>Juicy burger topped with cheese, lettuce, and tomato.</p>
-        <p>Price: $10.00</p>
-        <button onclick="addToCart('Cheeseburger', 10)">Add to Cart</button>
-    </div>
-    <div class="menu-item">
-        <img src="burger2.jpg" alt="Veggie Burger">
-        <h4>Veggie Burger</h4>
-        <p>Delicious plant-based burger with fresh toppings.</p>
-        <p>Price: $9.00</p>
-        <button onclick="addToCart('Veggie Burger', 9)">Add to Cart</button>
-    </div>
-</section>
-
-<section class="cart">
-    <h2>Your Cart</h2>
-    <ul id="cart-items"></ul>
-    <p id="total-price">Total: $0.00</p>
-    <button onclick="placeOrder()">Place Order</button>
-</section>
-
-<footer>
-    <p>&copy; 2024 Food Delivery Service</p>
-</footer>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
