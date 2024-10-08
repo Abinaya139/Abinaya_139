@@ -70,6 +70,15 @@ section#menu {
     margin: 10px 0;
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+}
+
+.menu-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    margin-right: 15px;
 }
 
 .menu-item button {
@@ -121,5 +130,10 @@ footer {
 @media (max-width: 600px) {
     .restaurant-card {
         width: 90%;
+    }
+
+    .menu-item {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
