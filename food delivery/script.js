@@ -14,11 +14,11 @@ function showMenu() {
 
     // Populate the menu items
     const menuItems = [
-        { name: 'Pizza', price: 9.99 },
-        { name: 'Burger', price: 5.99 },
-        { name: 'Sushi', price: 12.99 },
-        { name: 'Pasta', price: 7.99 },
-        { name: 'Salad', price: 4.99 }
+        { name: 'Pizza', price: 120.00 },
+        { name: 'Burger', price: 100.00 },
+        { name: 'Sushi', price: 200.00 },
+        { name: 'Pasta', price: 70.00 },
+        { name: 'Salad', price: 90.00 }
     ];
 
     const menuList = document.getElementById('menu-items');
