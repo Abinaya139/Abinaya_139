@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Delivery Service</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -13,7 +13,7 @@
     <nav>
         <ul>
             <li><a href="#" onclick="showHome()">Home</a></li>
-            <li><a href="#" onclick="showMenu()">Restaurants</a></li>
+            <li><a href="#" onclick="showMenu()">Menu</a></li>
         </ul>
     </nav>
 </header>
@@ -37,20 +37,40 @@
 
 <!-- Menu Page -->
 <section id="menu" class="view" style="display: none;">
-    <h2>Menu Items for Restaurant Name 1</h2>
+    <h2>Menu Items</h2>
+
+    <!-- Pizza Section -->
+    <h3>Pizza</h3>
     <div class="menu-item">
-        <img src="dish1.jpg" alt="Dish 1">
-        <h3>Dish Name 1</h3>
-        <p>Delicious description of the dish.</p>
-        <p>Price: $10.00</p>
-        <button onclick="addToCart('Dish Name 1', 10)">Add to Cart</button>
+        <img src="pizza1.jpg" alt="Pizza Margherita">
+        <h4>Pizza Margherita</h4>
+        <p>Classic pizza with mozzarella and basil.</p>
+        <p>Price: $12.00</p>
+        <button onclick="addToCart('Pizza Margherita', 12)">Add to Cart</button>
     </div>
     <div class="menu-item">
-        <img src="dish2.jpg" alt="Dish 2">
-        <h3>Dish Name 2</h3>
-        <p>Delicious description of the dish.</p>
-        <p>Price: $12.00</p>
-        <button onclick="addToCart('Dish Name 2', 12)">Add to Cart</button>
+        <img src="pizza2.jpg" alt="Pepperoni Pizza">
+        <h4>Pepperoni Pizza</h4>
+        <p>Delicious pizza topped with pepperoni slices.</p>
+        <p>Price: $14.00</p>
+        <button onclick="addToCart('Pepperoni Pizza', 14)">Add to Cart</button>
+    </div>
+
+    <!-- Burger Section -->
+    <h3>Burgers</h3>
+    <div class="menu-item">
+        <img src="burger1.jpg" alt="Cheeseburger">
+        <h4>Cheeseburger</h4>
+        <p>Juicy burger topped with cheese, lettuce, and tomato.</p>
+        <p>Price: $10.00</p>
+        <button onclick="addToCart('Cheeseburger', 10)">Add to Cart</button>
+    </div>
+    <div class="menu-item">
+        <img src="burger2.jpg" alt="Veggie Burger">
+        <h4>Veggie Burger</h4>
+        <p>Delicious plant-based burger with fresh toppings.</p>
+        <p>Price: $9.00</p>
+        <button onclick="addToCart('Veggie Burger', 9)">Add to Cart</button>
     </div>
 </section>
 
@@ -68,4 +88,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
