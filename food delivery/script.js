@@ -1,9 +1,9 @@
 const menuItems = [
-    { id: 1, name: "Margherita Pizza", price: 75.99 },
-    { id: 2, name: "Pepperoni Pizza", price: 50.99 },
-    { id: 3, name: "Caesar Salad", price: 10.99 },
-    { id: 4, name: "Spaghetti Carbonara", price: 20.99 },
-    { id: 5, name: "Cheeseburger", price: 25.99 },
+    { id: 1, name: "Margherita Pizza", price: 12.99, image: "images/margherita-pizza.jpg" },
+    { id: 2, name: "Pepperoni Pizza", price: 14.99, image: "images/pepperoni-pizza.jpg" },
+    { id: 3, name: "Caesar Salad", price: 9.99, image: "images/caesar-salad.jpg" },
+    { id: 4, name: "Spaghetti Carbonara", price: 13.99, image: "images/spaghetti-carbonara.jpg" },
+    { id: 5, name: "Cheeseburger", price: 11.99, image: "images/cheeseburger.jpg" },
 ];
 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -27,13 +27,13 @@ function renderMenu() {
         const li = document.createElement("li");
         li.className = "menu-item";
         li.innerHTML = `
-            ${item.name} - $${item.price.toFixed(2)} 
+            <img src="${item.image}" alt="${item.name}">
+            <span>${item.name} - $${item.price.toFixed(2)}</span>
             <button onclick="addToCart(${item.id})">Add to Cart</button>
         `;
         menuList.appendChild(li);
     });
 }
-
 function addToCart(itemId) {
     const item = menuItems.find(i => i.id === itemId);
     const cartItem = cart.find(i => i.id === itemId);
