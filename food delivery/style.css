@@ -25,6 +25,7 @@ nav ul li {
     padding: 10px;
     display: inline-block;
     width: 200px;
+    text-align: center;
 }
 
 .restaurant-card img, .menu-item img {
@@ -43,4 +44,3 @@ footer {
 .view {
     display: none;
 }
-
