@@ -1,7 +1,6 @@
 let users = JSON.parse(localStorage.getItem('users')) || [];
 let posts = JSON.parse(localStorage.getItem('posts')) || [];
 let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
-let currentPostId = null;
 
 // Function to signup/login
 function signup() {
@@ -101,12 +100,12 @@ function createPostDiv(post) {
     postDiv.innerHTML = `
         <h4>${post.username} <small>${post.date}</small></h4>
         <p>${post.text}</p>
-        ${post.image ? <img src="${post.image}" alt="Post Image" style="max-width: 100%;"> : ''}
+        ${post.image ? `<img src="${post.image}" alt="Post Image" style="max-width: 100%;">` : ''}
         <button class="like-button" onclick="likePost(${post.id})">
             ${currentUser.likedPosts.includes(post.id) ? '❤️' : '🤍'} (${post.likes})
         </button>
         <button onclick="showComments(${post.id})">Comment</button>
-        ${post.userId === currentUser.id ? <button onclick="deletePost(${post.id})">Delete</button> : ''}
+        ${post.userId === currentUser.id ? `<button onclick="deletePost(${post.id})">Delete</button>` : ''}
         <div class="comments">
             <h5>Comments</h5>
             <div id="comments-${post.id}">${createCommentsHtml(post.comments)}</div>
@@ -180,45 +179,45 @@ function showComments(postId) {
 
 // Function to add a comment
 function addComment(postId) {
-    const commentInput = document.getElementById(new-comment-${postId});
+    const commentInput = document.getElementById(`new-comment-${postId}`);
     const commentText = commentInput.value.trim();
-    const post = posts.find(p => p.id === postId);
 
     if (commentText) {
-        const comment = {
-            username: currentUser.username,
-            text: commentText,
-            date: new Date().toLocaleString()
-        };
-        post.comments.push(comment);
-        localStorage.setItem('posts', JSON.stringify(posts));
-        commentInput.value = '';
-        const commentsDiv = document.getElementById(comments-${postId});
-        commentsDiv.innerHTML = createCommentsHtml(post.comments);
-        showAlert('Comment added successfully!');
+        const post = posts.find(post => post.id === postId);
+        if (post) {
+            const comment = {
+                username: currentUser.username,
+                text: commentText,
+                date: new Date().toLocaleString()
+            };
+            post.comments.push(comment);
+            localStorage.setItem('posts', JSON.stringify(posts));
+            displayFeed();
+            commentInput.value = ''; // Clear the input
+        }
     } else {
-        showAlert('Please enter a comment.', true);
+        showAlert('Please enter a comment before submitting.', true);
     }
 }
 
-// Function to like/unlike a post
+// Function to like a post
 function likePost(postId) {
-    const post = posts.find(p => p.id === postId);
-    const likedIndex = currentUser.likedPosts.indexOf(postId);
-
-    if (likedIndex === -1) {
-        currentUser.likedPosts.push(postId);
-        post.likes += 1;
-        showAlert('Post liked!');
-    } else {
-        currentUser.likedPosts.splice(likedIndex, 1);
-        post.likes -= 1;
-        showAlert('Post unliked!');
+    const post = posts.find(post => post.id === postId);
+    if (post) {
+        const likedIndex = currentUser.likedPosts.indexOf(postId);
+        if (likedIndex === -1) {
+            currentUser.likedPosts.push(postId);
+            post.likes++;
+            showAlert('Post liked!');
+        } else {
+            currentUser.likedPosts.splice(likedIndex, 1);
+            post.likes--;
+            showAlert('Post unliked!');
+        }
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        localStorage.setItem('posts', JSON.stringify(posts));
+        displayFeed();
     }
-
-    localStorage.setItem('currentUser', JSON.stringify(currentUser));
-    localStorage.setItem('posts', JSON.stringify(posts));
-    displayFeed();
 }
 
 // Function to delete a post
@@ -226,68 +225,73 @@ function deletePost(postId) {
     posts = posts.filter(post => post.id !== postId);
     localStorage.setItem('posts', JSON.stringify(posts));
     displayFeed();
-    showAlert('Post deleted successfully!');
+    showAlert('Post deleted!');
 }
 
-// Function to follow/unfollow a user
-function followUser(userId) {
-    const userToFollow = users.find(user => user.id === userId);
-    const followingIndex = currentUser.following.indexOf(userId);
-
-    if (followingIndex === -1) {
-        currentUser.following.push(userId);
-        userToFollow.followers.push(currentUser.id);
-        showAlert(You are now following ${userToFollow.username}!);
-    } else {
-        currentUser.following.splice(followingIndex, 1);
-        userToFollow.followers.splice(userToFollow.followers.indexOf(currentUser.id), 1);
-        showAlert(You unfollowed ${userToFollow.username}.);
+// Function to delete the account
+function deleteAccount() {
+    if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+        users = users.filter(user => user.id !== currentUser.id);
+        posts = posts.filter(post => post.userId !== currentUser.id);
+        localStorage.setItem('users', JSON.stringify(users));
+        localStorage.setItem('posts', JSON.stringify(posts));
+        logout();
+        showAlert('Account deleted!');
     }
-
-    localStorage.setItem('currentUser', JSON.stringify(currentUser));
-    localStorage.setItem('users', JSON.stringify(users));
-    displayOtherUsers();
 }
 
-// Display other users to follow
-function displayOtherUsers() {
-    const followList = document.getElementById('follow-users-list');
-    followList.innerHTML = '';
-
-    const otherUsers = users.filter(user => user.id !== currentUser.id);
-
-    otherUsers.forEach(user => {
-        const userDiv = document.createElement('div');
-        userDiv.innerHTML = `
-            <span>${user.username}</span>
-            <button onclick="followUser(${user.id})">
-                ${currentUser.following.includes(user.id) ? 'Unfollow' : 'Follow'}
-            </button>
-        `;
-        followList.appendChild(userDiv);
-    });
-}
-
-// Function to show alert messages
+// Function to display alert messages
 function showAlert(message, isError = false) {
     const alertBox = document.getElementById('alert-box');
     alertBox.innerText = message;
-    alertBox.className = alert ${isError ? 'error' : 'success'};
+    alertBox.className = 'alert ' + (isError ? 'error' : 'success');
     alertBox.style.display = 'block';
-
     setTimeout(() => {
         alertBox.style.display = 'none';
     }, 3000);
 }
 
-// On page load
-document.addEventListener('DOMContentLoaded', () => {
-    const savedPage = localStorage.getItem('currentPage') || 'login-page';
-    showPage(savedPage);
+// Function to display other users to follow
+function displayOtherUsers() {
+    const followUsersList = document.getElementById('follow-users-list');
+    followUsersList.innerHTML = '<h3>Other Users</h3>';
+
+    users.forEach(user => {
+        if (user.id !== currentUser.id) {
+            const isFollowing = currentUser.following.includes(user.id);
+            const userDiv = document.createElement('div');
+            userDiv.innerHTML = `
+                <span>${user.username}</span>
+                <button onclick="followUser(${user.id}, this)">${isFollowing ? 'Unfollow' : 'Follow'}</button>
+            `;
+            followUsersList.appendChild(userDiv);
+        }
+    });
+}
+
+// Function to follow/unfollow a user
+function followUser(userId, buttonElement) {
+    if (!currentUser.following.includes(userId)) {
+        currentUser.following.push(userId);
+        showAlert('You are now following this user!');
+    } else {
+        currentUser.following.splice(currentUser.following.indexOf(userId), 1);
+        showAlert('You have unfollowed this user.');
+    }
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    buttonElement.innerText = currentUser.following.includes(userId) ? 'Unfollow' : 'Follow'; // Toggle button text
+    displayOtherUsers(); // Refresh the list
+    updateUserStats(); // Update stats
+}
+
+// On page load, check for current user
+window.onload = () => {
     if (currentUser) {
         document.getElementById('user-id').innerText = currentUser.username;
         showPage('home-page');
         displayFeed();
         displayOtherUsers();
+    } else {
+        showPage('login-page');
     }
-});
+};
