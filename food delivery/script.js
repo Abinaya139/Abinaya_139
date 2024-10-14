@@ -1,6 +1,6 @@
 const restaurantMenus = {
     'The Garden of Eat’n': [
-        { name: 'Margherita Pizza', price: 8.99, img: "E:\abi fswd\images.jpg" },
+        { name: 'Margherita Pizza', price: 8.99, img: food delivery/images/magherita.jpg },
         { name: 'Pasta Alfredo', price: 12.99, img: food delivery/images/Alfredo.jpg }
     ],
     'Basic B Burgers': [
