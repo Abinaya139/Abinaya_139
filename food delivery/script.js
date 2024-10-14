@@ -1,19 +1,19 @@
 const restaurantMenus = {
     'The Garden of Eat’n': [
-        { name: 'Margherita Pizza', price: 8.99, img: 'images/margherita.jpg' },
-        { name: 'Pasta Alfredo', price: 12.99, img: 'images/alfredo.jpg' }
+        { name: 'Margherita Pizza', price: 8.99, img: "E:\abi fswd\images.jpg" },
+        { name: 'Pasta Alfredo', price: 12.99, img: "E:\abi fswd\Alfredo.jpg" }
     ],
     'Basic B Burgers': [
-        { name: 'Butter Chicken', price: 10.99, img: 'images/butter_chicken.jpg' },
-        { name: 'Spicy Paneer', price: 9.49, img: 'images/spicy_paneer.jpg' }
+        { name: 'Butter Chicken', price: 10.99, img: "E:\abi fswd\butter_chicken.jpg" },
+        { name: 'Spicy Paneer', price: 9.49, img: "E:\abi fswd\spicy paneer.jpg" }
     ],
     'Haute Dog Diner': [
-        { name: 'Chicken Noodles', price: 7.99, img: 'images/chicken_noodles.jpg' },
-        { name: 'Fried Rice', price: '6.49', img: 'images/fried_rice.jpg' }
+        { name: 'Chicken Noodles', price: 7.99, img: "E:\abi fswd\chicken_noodles.jpg" },
+        { name: 'Fried Rice', price: '6.49', img: "E:\abi fswd\fried_rice.jpg" }
     ],
     'Bread & Spread': [
-        { name: 'Cheeseburger', price: 9.99, img: 'images/cheeseburger.jpg' },
-        { name: 'Fries', price: 3.99, img: 'images/fries.jpg' }
+        { name: 'Cheeseburger', price: 9.99, img: "E:\abi fswd\cheese_burger.jpg" },
+        { name: 'Fries', price: 3.99, img: "E:\abi fswd\fries.jpg" }
     ]
 };
 
