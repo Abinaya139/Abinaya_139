@@ -5,7 +5,7 @@ const restaurantMenus = {
     ],
     'Basic B Burgers': [
         { name: 'Butter Chicken', price: 10.99, img: food delivery/images/butter_chicken.jpg },
-        { name: 'Spicy Paneer', price: 9.49, img: "E:\abi fswd\spicy paneer.jpg" }
+        { name: 'Spicy Paneer', price: 9.49, img: food delivery/images/spicy paneer.jpg }
     ],
     'Haute Dog Diner': [
         { name: 'Chicken Noodles', price: 7.99, img: food delivery/images/chicken_noodles.jpg },
