@@ -5,7 +5,7 @@ const restaurantMenus = {
     ],
     'Basic B Burgers': [
         { name: 'Butter Chicken', price: 10.99, img: food delivery/images/butterchicken.jpg },
-        { name: 'Spicy Paneer', price: 9.49, img: 'images/spicy_paneer.jpg' }
+        { name: 'Spicy Paneer', price: 9.49, img: food delivery/images/spicypaneer.jpg }
     ],
     'Haute Dog Diner': [
         { name: 'Chicken Noodles', price: 7.99, img: food delivery/images/chickennoodles.jpg },
@@ -25,7 +25,7 @@ function login() {
 
     if (username && password) {
         localStorage.setItem("username", username);
-        window.location.href = "restaurants.html";
+        window.location.href = "restaurant.html";
     } else {
         alert("Please enter username and password.");
     }
