@@ -35,11 +35,8 @@ function login(event) {
 
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-
-    // Dummy validation - replace with your actual validation logic
-    if (username === "user" && password === "pass") {
-        // Redirect to the restaurant page
-        window.location.href = "restaurant.html"; // Ensure this is the correct path
+    if (username === "user" && password === "pass"){
+        window.location.href = "restaurant.html"; 
     } else {
         alert("Invalid credentials. Please try again.");
     }
