@@ -13,7 +13,7 @@ const restaurantMenus = {
     ],
     'Bread & Spread': [
         { name: 'Cheeseburger', price: 9.99, img: food delivery/images/cheeseburger.jpg },
-        { name: 'Fries', price: 3.99, img: 'images/fries.jpg' }
+        { name: 'Fries', price: 3.99, img: food delivery/images/fries.jpg }
     ]
 };
 
