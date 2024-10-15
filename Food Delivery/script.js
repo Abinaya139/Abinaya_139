@@ -1,7 +1,7 @@
 let restaurants = [
     { id: 1, name: "Pizza Place", price: 10, img: "pizza.jpg" },
     { id: 2, name: "Sushi Spot", price: 15, img: "sushi.jpg" },
-    { id: 3, name: "Burger Joint", price: 8, img: "burger.jpg" },
+    { id: 3, name: "Burger Joint", price: 8, img: Food Delivery/burger.jpg },
 ];
 
 let cart = [];
