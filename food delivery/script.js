@@ -25,7 +25,7 @@ function login() {
 
     if (username && password) {
         localStorage.setItem("username", username);
-        window.location.href = "restaurants.html";
+        window.location.href = "restaurant.html";
     } else {
         alert("Please enter username and password.");
     }
