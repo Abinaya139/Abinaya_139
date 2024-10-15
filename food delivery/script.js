@@ -4,7 +4,7 @@ const restaurantMenus = {
         { name: 'Pasta Alfredo', price: 12.99, img: food delivery/images/Alfredo.jpg }
     ],
     'Basic B Burgers': [
-        { name: 'Butter Chicken', price: 10.99, img: 'images/butter_chicken.jpg' },
+        { name: 'Butter Chicken', price: 10.99, img: food delivery/images/butter_chicken.jpg },
         { name: 'Spicy Paneer', price: 9.49, img: 'images/spicy_paneer.jpg' }
     ],
     'Haute Dog Diner': [
