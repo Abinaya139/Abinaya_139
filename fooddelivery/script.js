@@ -23,16 +23,13 @@ function login() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
+    // Basic validation (you can replace this with real authentication logic)
     if (username && password) {
-        localStorage.setItem("username", username);
-        window.location.href = "restaurant.html";
+        // Redirect to restaurant page
+        window.location.href = "restaurant.html"; // Make sure this is the correct path to your restaurant page
     } else {
-        alert("Please enter username and password.");
+        alert("Please enter a valid username and password.");
     }
-}
-function login() {
-    //simulate to redirect 
-    window.location.href= "restaurant.html";
 }
 
 window.onload = function() {
