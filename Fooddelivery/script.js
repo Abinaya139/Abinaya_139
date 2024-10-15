@@ -75,11 +75,12 @@ function renderCart() {
     cart.forEach(item => {
         totalPrice += item.price * item.quantity;
         const li = document.createElement("li");
-        li.innerHTML = ${item.name} - ₹${item.price.toFixed(2)} x ${item.quantity};
+        li.className = "cart-item";
+        li.innerHTML = `${item.name} - ₹${item.price.toFixed(2)} x ${item.quantity}`;
         cartList.appendChild(li);
     });
 
-    totalPriceElement.innerText = ₹${totalPrice.toFixed(2)};
+    totalPriceElement.innerText = `₹${totalPrice.toFixed(2)}`;
     cartActions.style.display = cart.length > 0 ? 'block' : 'none';
 }
 
@@ -111,7 +112,7 @@ function renderOrderHistory() {
 
     orderHistory.forEach(order => {
         const li = document.createElement("li");
-        li.innerHTML = Order on ${order.date}: Total ₹${order.total};
+        li.innerHTML = `Order on ${order.date}: Total ₹${order.total}`;
         orderHistoryList.appendChild(li);
     });
 }
