@@ -31,7 +31,10 @@ function login() {
         alert("Please enter a valid username and password.");
     }
 }
-
+function login event(){
+         //redirect to restaurant.html
+       window.location.href= "restaurant.html";
+}
 window.onload = function() {
     const username = localStorage.getItem("username");
     
