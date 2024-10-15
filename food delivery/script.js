@@ -8,7 +8,7 @@ const restaurantMenus = {
         { name: 'Spicy Paneer', price: 9.49, img: 'images/spicy_paneer.jpg' }
     ],
     'Haute Dog Diner': [
-        { name: 'Chicken Noodles', price: 7.99, img: 'images/chicken_noodles.jpg' },
+        { name: 'Chicken Noodles', price: 7.99, img: food delivery/images/chickennoodles.jpg },
         { name: 'Fried Rice', price: '6.49', img: 'images/fried_rice.jpg' }
     ],
     'Bread & Spread': [
