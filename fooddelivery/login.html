@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Login - Food Delivery</title>
+</head>
+<body>
+<header>
+    <h1>Food Delivery Service</h1>
+</header>
+
+<div class="login-container">
+    <h2>Login</h2>
+    <form id="loginForm" onsubmit="login(event)">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2024 Food Delivery Service. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+function login(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // Dummy validation - replace with your actual validation logic
+    if (username === "user" && password === "pass") {
+        window.location.href = "restaurant.html"; // Adjust this path as needed
+    } else {
+        alert("Invalid credentials. Please try again.");
+    }
+}
+</script>
+</body>
+</html>
