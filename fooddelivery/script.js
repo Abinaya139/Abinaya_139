@@ -30,17 +30,6 @@ function login() {
         alert("Please enter username and password.");
     }
 }
-function login(event) {
-    event.preventDefault(); // Prevent default form submission
-
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    if (username === "user" && password === "pass"){
-        window.location.href = "restaurant.html"; 
-    } else {
-        alert("Invalid credentials. Please try again.");
-    }
-}
 
 
 window.onload = function() {
