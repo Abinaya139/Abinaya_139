@@ -30,7 +30,6 @@ document.getElementById('register-btn').addEventListener('click', function() {
     document.getElementById('auth-section').style.display = 'none';
     document.getElementById('register-section').style.display = 'block';
 });
-
 document.getElementById('register-form').addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -56,7 +55,6 @@ document.getElementById('back-to-login-btn').addEventListener('click', function(
     document.getElementById('register-section').style.display = 'none';
     document.getElementById('auth-section').style.display = 'block';
 });
-
 document.getElementById('form').addEventListener('submit', function(e) {
     e.preventDefault();
     
