@@ -1,9 +1,8 @@
- // Initialize users in local storage if not present
+// Initialize users and ads in local storage if not present
 if (!localStorage.getItem('users')) {
     localStorage.setItem('users', JSON.stringify([]));
 }
 
-// Initial setup for ads
 if (!localStorage.getItem('ads')) {
     localStorage.setItem('ads', JSON.stringify([]));
 }
@@ -63,10 +62,10 @@ document.getElementById('form').addEventListener('submit', function(e) {
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
     const price = document.getElementById('price').value;
+    const rating = document.getElementById('rating').value;
     const imageInput = document.getElementById('image');
     const location = document.getElementById('location').value;
     
-    // Create a FileReader to read the uploaded image
     const reader = new FileReader();
     reader.onload = function(event) {
         const imageDataUrl = event.target.result;
@@ -74,17 +73,15 @@ document.getElementById('form').addEventListener('submit', function(e) {
         const username = localStorage.getItem('loggedInUser');
         const ads = JSON.parse(localStorage.getItem('ads'));
         
-        // Get the current date and time
         const currentDateTime = new Date().toLocaleString();
         
-        ads.push({ title, description, price, username, image: imageDataUrl, location, dateTime: currentDateTime });
+        ads.push({ title, description, price, rating, username, image: imageDataUrl, location, dateTime: currentDateTime });
         localStorage.setItem('ads', JSON.stringify(ads));
 
         loadAds();
         document.getElementById('form').reset();
     };
     
-    // Read the uploaded file
     if (imageInput.files.length > 0) {
         reader.readAsDataURL(imageInput.files[0]);
     }
@@ -110,7 +107,7 @@ function loadUserDashboard() {
     document.getElementById('register-section').style.display = 'none';
     document.getElementById('ad-form').style.display = 'block';
     document.getElementById('ads').style.display = 'block';
-    document.getElementById('user-info').innerText = Logged in as: ${localStorage.getItem('loggedInUser')};
+    document.getElementById('user-info').innerText = `Logged in as: ${localStorage.getItem('loggedInUser')}`;
     document.getElementById('logout-btn').style.display = 'inline-block';
     loadAds();
 }
@@ -124,46 +121,38 @@ function loadAds() {
         const li = document.createElement('li');
         li.innerHTML = `
             <strong>${ad.title}</strong><br>
-            ${ad.image ? <img src="${ad.image}" alt="${ad.title}" style="max-width: 200px; max-height: 150px;"><br> : ''}
+            ${ad.image ? `<img src="${ad.image}" alt="${ad.title}" style="max-width: 200px; max-height: 150px;"><br>` : ''}
             ${ad.description}<br>
-            <em>Price: ₹${ad.price}</em><br>
+            <em>Price: ₹${ad.price} | Rating: ${ad.rating}</em><br>
             <small>Posted by: ${ad.username} on ${ad.dateTime}</small><br>
-            <small>Location: ${ad.location}</small>
+            <small>Location: ${ad.location}</small><br>
         `;
         
         const buyButton = document.createElement('button');
         buyButton.className = 'buy-button';
-        buyButton.innerText = 'Buy';
-        buyButton.onclick = () => buyAd(index);
+        buyButton.innerText = 'Buy Now';
+        buyButton.onclick = () => buyAd(ad);
         
         li.appendChild(buyButton);
         adList.appendChild(li);
     });
 }
 
-function buyAd(index) {
-    const ads = JSON.parse(localStorage.getItem('ads'));
-    const ad = ads[index];
-
-    if (confirm(Are you sure you want to buy "${ad.title}" for ₹${ad.price}?)) {
-        getDeliveryDetails(ad);
-    }
-}
-
-function getDeliveryDetails(ad) {
+function buyAd(ad) {
     const deliveryName = prompt("Please enter your name:");
     const deliveryAddress = prompt("Please enter your delivery address:");
     const deliveryPhone = prompt("Please enter your phone number:");
+    const paymentMethod = prompt("Please enter your payment method (e.g., Cash on Delivery):");
 
-    if (deliveryName && deliveryAddress && deliveryPhone) {
-        // Show order summary
+    if (deliveryName && deliveryAddress && deliveryPhone && paymentMethod) {
         const summaryDetails = document.getElementById('summary-details');
         summaryDetails.innerHTML = `
             <strong>Item:</strong> ${ad.title}<br>
             <strong>Price:</strong> ₹${ad.price}<br>
             <strong>Delivery Name:</strong> ${deliveryName}<br>
             <strong>Delivery Address:</strong> ${deliveryAddress}<br>
-            <strong>Phone:</strong> ${deliveryPhone}
+            <strong>Phone:</strong> ${deliveryPhone}<br>
+            <strong>Payment Method:</strong> ${paymentMethod}
         `;
 
         document.getElementById('order-summary').style.display = 'block';
