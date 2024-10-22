@@ -1,4 +1,4 @@
-// Initialize users in local storage if not present
+[9:48 AM, 10/22/2024] Shree🤍: // Initialize users in local storage if not present
 if (!localStorage.getItem('users')) {
     localStorage.setItem('users', JSON.stringify([]));
 }
@@ -110,7 +110,7 @@ function loadUserDashboard() {
     document.getElementById('register-section').style.display = 'none';
     document.getElementById('ad-form').style.display = 'block';
     document.getElementById('ads').style.display = 'block';
-    document.getElementById('user-info').innerText = `Logged in as: ${localStorage.getItem('loggedInUser')}`; // Corrected
+    document.getElementById('user-info').innerText = Logged in as: ${localStorage.getItem('loggedInUser')};
     document.getElementById('logout-btn').style.display = 'inline-block';
     loadAds();
 }
@@ -124,7 +124,7 @@ function loadAds() {
         const li = document.createElement('li');
         li.innerHTML = `
             <strong>${ad.title}</strong><br>
-            ${ad.image ? `<img src="${ad.image}" alt="${ad.title}" style="max-width: 200px; max-height: 150px;"><br>` : ''}
+            ${ad.image ? <img src="${ad.image}" alt="${ad.title}" style="max-width: 200px; max-height: 150px;"><br> : ''}
             ${ad.description}<br>
             <em>Price: ₹${ad.price}</em><br>
             <small>Posted by: ${ad.username} on ${ad.dateTime}</small><br>
@@ -145,7 +145,7 @@ function buyAd(index) {
     const ads = JSON.parse(localStorage.getItem('ads'));
     const ad = ads[index];
 
-    if (confirm(Are you sure you want to buy "${ad.title}" for ₹${ad.price}?)) { // Corrected string literal
+    if (confirm(Are you sure you want to buy "${ad.title}" for ₹${ad.price}?)) {
         getDeliveryDetails(ad);
     }
 }
@@ -178,3 +178,4 @@ document.getElementById('close-summary-btn').addEventListener('click', function(
 
 // Load the login page on initial load
 loadLoginPage();
+[9:48 AM, 10/22/2024] Shree🤍: 
