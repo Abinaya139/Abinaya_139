@@ -1,4 +1,4 @@
- // Initialize users in local storage if not present
+[9:48 AM, 10/22/2024] Shree🤍: // Initialize users in local storage if not present
 if (!localStorage.getItem('users')) {
     localStorage.setItem('users', JSON.stringify([]));
 }
@@ -57,12 +57,6 @@ document.getElementById('back-to-login-btn').addEventListener('click', function(
     document.getElementById('auth-section').style.display = 'block';
 });
 
-document.getElementById('register-btn').addEventListener('click', function() {
-    console.log("Register button clicked");
-    document.getElementById('auth-section').style.display = 'none';
-    document.getElementById('register-section').style.display = 'block';
-});
-
 document.getElementById('form').addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -101,67 +95,6 @@ document.getElementById('logout-btn').addEventListener('click', function() {
     loadLoginPage();
 });
 
-  document.addEventListener('DOMContentLoaded', function() {
-    // Initialize users in local storage if not present
-    if (!localStorage.getItem('users')) {
-        localStorage.setItem('users', JSON.stringify([]));
-    }
-
-    // Initial setup for ads
-    if (!localStorage.getItem('ads')) {
-        localStorage.setItem('ads', JSON.stringify([]));
-    }
-
-    document.getElementById('login-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const users = JSON.parse(localStorage.getItem('users'));
-        const user = users.find(u => u.username === username && u.password === password);
-        
-        if (user) {
-            localStorage.setItem('loggedInUser', username);
-            loadUserDashboard();
-        } else {
-            alert('Invalid login credentials');
-        }
-    });
-
-    // Register button logic
-    document.getElementById('register-btn').addEventListener('click', function() {
-        console.log("Register button clicked");
-        document.getElementById('auth-section').style.display = 'none';
-        document.getElementById('register-section').style.display = 'block';
-    });
-
-    document.getElementById('register-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const newUsername = document.getElementById('new-username').value;
-        const newPassword = document.getElementById('new-password').value;
-        const users = JSON.parse(localStorage.getItem('users'));
-        const existingUser = users.find(u => u.username === newUsername);
-        
-        if (existingUser) {
-            alert('Username already exists!');
-        } else {
-            users.push({ username: newUsername, password: newPassword });
-            localStorage.setItem('users', JSON.stringify(users));
-            alert('Registration successful! You can now log in.');
-            document.getElementById('register-section').style.display = 'none';
-            document.getElementById('auth-section').style.display = 'block';
-            document.getElementById('register-form').reset();
-        }
-    });
-
-    document.getElementById('back-to-login-btn').addEventListener('click', function() {
-        document.getElementById('register-section').style.display = 'none';
-        document.getElementById('auth-section').style.display = 'block';
-    });
-
-    // Load the login page on initial load
-    loadLoginPage();
-});
-
 function loadLoginPage() {
     document.getElementById('auth-section').style.display = 'block';
     document.getElementById('register-section').style.display = 'none';
@@ -171,11 +104,6 @@ function loadLoginPage() {
     document.getElementById('logout-btn').style.display = 'none';
     document.getElementById('order-summary').style.display = 'none';
 }
-
-function loadUserDashboard() {
-    // Your existing loadUserDashboard logic
-}
-
 
 function loadUserDashboard() {
     document.getElementById('auth-section').style.display = 'none';
@@ -248,4 +176,6 @@ document.getElementById('close-summary-btn').addEventListener('click', function(
     document.getElementById('order-summary').style.display = 'none';
 });
 
-
+// Load the login page on initial load
+loadLoginPage();
+[9:48 AM, 10/22/2024] Shree🤍: 
