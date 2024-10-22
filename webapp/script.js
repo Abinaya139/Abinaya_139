@@ -1,4 +1,4 @@
-[9:48 AM, 10/22/2024] Shree🤍: // Initialize users in local storage if not present
+ // Initialize users in local storage if not present
 if (!localStorage.getItem('users')) {
     localStorage.setItem('users', JSON.stringify([]));
 }
@@ -178,4 +178,3 @@ document.getElementById('close-summary-btn').addEventListener('click', function(
 
 // Load the login page on initial load
 loadLoginPage();
-[9:48 AM, 10/22/2024] Shree🤍: 
