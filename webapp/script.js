@@ -57,6 +57,12 @@ document.getElementById('back-to-login-btn').addEventListener('click', function(
     document.getElementById('auth-section').style.display = 'block';
 });
 
+document.getElementById('register-btn').addEventListener('click', function() {
+    console.log("Register button clicked");
+    document.getElementById('auth-section').style.display = 'none';
+    document.getElementById('register-section').style.display = 'block';
+});
+
 document.getElementById('form').addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -96,14 +102,15 @@ document.getElementById('logout-btn').addEventListener('click', function() {
 });
 
 function loadLoginPage() {
-    document.getElementById('auth-section').style.display = 'block';
-    document.getElementById('register-section').style.display = 'none';
+    document.getElementById('auth-section').style.display = 'block'; // Login section
+    document.getElementById('register-section').style.display = 'none'; // Ensure this is hidden
     document.getElementById('ad-form').style.display = 'none';
     document.getElementById('ads').style.display = 'none';
     document.getElementById('user-info').innerText = '';
     document.getElementById('logout-btn').style.display = 'none';
     document.getElementById('order-summary').style.display = 'none';
 }
+
 
 function loadUserDashboard() {
     document.getElementById('auth-section').style.display = 'none';
