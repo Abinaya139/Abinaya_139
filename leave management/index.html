@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leave Management System</title>
+  <link rel="stylesheet" href="style6.css"> <!-- Linking external CSS file -->
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Leave Management System</h1>
+  </header>
+
+  <!-- Main container -->
+  <div class="container">
+    <!-- Leave Balance Section -->
+    <section class="leave-balance">
+      <h2 class="section-title">Your Leave Balance</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Leave Type</th>
+            <th>Available Days</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Casual Leave</td>
+            <td id="casual-leave-balance">12 days</td>
+          </tr>
+          <tr>
+            <td>Medical Leave</td>
+            <td id="medical-leave-balance">8 days</td>
+          </tr>
+          <tr>
+            <td>Earned Leave</td>
+            <td id="earned-leave-balance">15 days</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Leave Application Form -->
+    <section class="leave-application-form">
+      <h2 class="section-title">Apply for Leave</h2>
+      <form id="leave-form"> 
+        <!-- Name -->
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+        <!-- Leave Type Selection -->
+        <label for="leave-type">Leave Type:</label>
+        <select id="leave-type" name="leave_type" required>
+          <option value="casual_leave">Casual Leave</option>
+          <option value="medical_leave">Medical Leave</option>
+          <option value="earned_leave">Earned Leave</option>
+        </select>
+
+        <!-- Leave Start Date -->
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date" name="start_date" required>
+
+        <!-- Leave End Date -->
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date" name="end_date" required>
+
+        <!-- Reason for Leave -->
+        <label for="reason">Reason for Leave:</label>
+        <textarea id="reason" name="reason" rows="4" placeholder="Enter your reason for taking leave" required></textarea>
+
+        <!-- Submit Button -->
+        <button type="submit">Apply Leave</button>
+      </form>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Leave Management System | All Rights Reserved</p>
+  </footer>
+
+  <!-- Linking external JS file -->
+  <script src="script6.js"></script>
+
+</body>
+</html>
