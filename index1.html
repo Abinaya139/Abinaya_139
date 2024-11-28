@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Page</title>
+    <style>
+        /* Importing Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+        /* Global Styles */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #1c1b29, #393b54);
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            text-align: center;
+            padding: 20px 15px;
+            background: #28293d;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            margin: 30px 20px;
+            width: 90%;
+            max-width: 900px;
+            animation: fadeInHeader 1.5s forwards;
+            transform: translateY(-30px);
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            color: #c7d2fe;
+            background: linear-gradient(90deg, #c7d2fe, #b4c5e4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Button Container for Grid Layout */
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 20px;
+            max-width: 90%;
+            margin: 20px auto;
+            justify-content: center;
+        }
+
+        /* Button Styles */
+        .button {
+            font-size: 1.1em;
+            padding: 15px 25px;
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Unique Button Backgrounds */
+        .button:nth-child(1) { background: linear-gradient(135deg, #6b6ff0, #4f4faf); }
+        .button:nth-child(2) { background: linear-gradient(135deg, #42b883, #347a56); }
+        .button:nth-child(3) { background: linear-gradient(135deg, #f4a261, #e76f51); }
+        .button:nth-child(4) { background: linear-gradient(135deg, #3b6978, #204051); }
+        .button:nth-child(5) { background: linear-gradient(135deg, #c44536, #772f1a); }
+        .button:nth-child(6) { background: linear-gradient(135deg, #577399, #495867); }
+        .button:nth-child(7) { background: linear-gradient(135deg, #7f7f7f, #595959); }
+        .button:nth-child(8) { background: linear-gradient(135deg, #bb4d4d, #8c3333); }
+
+        /* Button Hover Effects */
+        .button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer Styles */
+        .footer {
+            margin: 20px;
+            padding: 15px 20px;
+            font-size: 1em;
+            color: #90a6ff;
+            background: #2c2d3c;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 900px;
+            width: 90%;
+            opacity: 0;
+            animation: fadeInFooter 1.5s 1.5s forwards;
+        }
+
+        /* Animations */
+        @keyframes fadeInHeader { to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInFooter { to { opacity: 1; } }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>FULL STACK WEB DEVELOPMENT LAB EXPERIMENTS</h1>
+    </div>
+
+    <div class="button-container">
+        <button class="button" onclick="portfolio()">Portfolio</button>
+        <button class="button" onclick="todo()">To-do List</button>
+        <button class="button" onclick="microblogging()">Microblogging Application</button>
+        <button class="button" onclick="fooddellivery()">Food Delivery Website</button>
+        <button class="button" onclick="webapp()">Classified Webpage</button>
+        <button class="button" onclick="leaveManagement()">Leave Management System</button>
+        <button class="button" onclick="projectManagement()">Project Management</button>
+        <button class="button" onclick="onlineSurvey()">Online Survey Application</button>
+    </div>
+
+    <div class="footer">
+        Developed by: Abinayashree S
+    </div>
+
+    <script>
+        function portfolio() {
+            location.replace("https://abinaya139.github.io/Abinaya_139/port/portfolio.html");
+        }
+
+        function todo() {
+            location.replace("https://abinaya139.github.io/Abinaya_139/todo/signup.html");
+        }
+
+        function microblog() {
+            location.replace("https://abinaya139.github.io/Abinaya_139/microblogging/index.html");
+        }
+
+        function fooddelivery() {
+            window.open("https://abinaya139.github.io/Abinaya_139/fooddellivery/login.html");
+        }
+
+        function classified() {
+            location.replace("https://abinaya139.github.io/Abinaya_139/webapp/index.html");
+        }
+
+        function leaveManagement() {
+            location.replace("https://abinaya139.github.io/Abinaya_139/leave management/index.html");
+        }
+
+        function projectManagement() {
+            location.replace("https://abinaya139.github.io/Abinaya_139/project dashboard/index.html");
+        }
+
+        function onlineSurvey() {
+            location.replace("https://abinaya139.github.io/Abinaya_139/online survey/index.html");
+        }
+    </script>
+</body>
+</html>
